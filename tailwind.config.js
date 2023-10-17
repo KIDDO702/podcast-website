@@ -6,7 +6,18 @@ module.exports = {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+        fontFamily: {
+            nunito: ['Nunito Sans', 'sans-serif'],
+            poppins: ['Poppins', 'sans-serif']
+        },
+
+        container: {
+            center: true
+        },
+
+
+    },
   },
   plugins: [],
 }
