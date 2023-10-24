@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class AuthenticatedSession extends Controller
@@ -49,6 +50,34 @@ class AuthenticatedSession extends Controller
 
         return redirect(route('home'));
     }
+
+
+    public function passwordView(): View
+    {
+        return view('auth.confirm-password');
+    }
+
+    public function confirmPassword(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'password' => 'required'
+        ]);
+
+        if (! Hash::check($validated['password'], $request->user()->password)) {
+
+            toast()
+                ->warning('The provided password does not match our records')
+                ->pushOnNextPage();
+
+            return back();
+        }
+
+        $request->session()->passwordConfirmed();
+
+        return redirect()->intended();
+    }
+
+
 
     public function logout(Request $request): RedirectResponse
     {

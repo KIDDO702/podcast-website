@@ -68,7 +68,7 @@
                                     @endrole
                                     @role('admin')
                                     <li class="block py-1.5 px-2.5">
-                                        <a href="#" class="text-lg font-semibold flex items-center">
+                                        <a href="{{ route('admin.index') }}" class="text-lg font-semibold flex items-center">
                                             <span class="material-symbols-outlined mr-2 text-red-800 text-3xl">
                                                 shield_person
                                             </span>
@@ -76,7 +76,7 @@
                                                 Admin
                                             </span>
                                         </a>
-                                    </li>        
+                                    </li>
                                     @endrole
                                     <li class="block py-1.5 px-2.5 bg-red-800 text-yellow-500">
                                         <form action="{{ route('logout') }}" method="post">

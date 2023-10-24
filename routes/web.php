@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterUser;
 use App\Http\Controllers\Auth\AuthenticatedSession;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\ShowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,16 +37,28 @@ Route::get('/', function () {
 Route::middleware('auth')->group( function() {
 
     Route::middleware('role:admin')->group( function () {
-        Route::get('/admin', function () {
-            return 'admin route';
+        Route::prefix('admin')->group( function () {
+            Route::get('/', [AdminController::class, 'index'])->name('admin.index')->middleware('password.confirm');
+            Route::get('/genre', [AdminController::class, 'genre'])->name('admin.genre');
+            Route::get('/genre/e/{id}', [GenreController::class, 'edit'])->name('admin.genre.edit');
+            Route::put('/genre/e/{id}', [GenreController::class, 'update'])->name('admin.genre.update');
+            Route::delete('/genre/d/{id}', [GenreController::class, 'destroy'])->name('admin.genre.delete')->middleware('password.confirm');
+
+
+            Route::prefix('show')->group( function() {
+                Route::get('/', [AdminController::class, 'show'])->name('admin.show');
+                Route::get('/create', [ShowController::class, 'create'])->name('admin.show.create');
+            });
         });
     });
 
     Route::middleware('role:host')->group(function () {
         Route::get('/host', function () {
             return 'host route';
-        });
+        })->middleware('password.confirm');
     });
 
 
+    Route::get('/confirm-password', [AuthenticatedSession::class, 'passwordView'])->name('password.confirm');
+    Route::post('/confirm-password', [AuthenticatedSession::class, 'confirmPassword'])->name('confirmed');
 });
