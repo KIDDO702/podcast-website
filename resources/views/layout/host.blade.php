@@ -4,17 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blvck Radio</title>
+    <title>Blvck Host</title>
 
-    {{-- Google fonts --}}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    {{-- google fonts --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;0,6..12,1000;1,6..12,200;1,6..12,300;1,6..12,400;1,6..12,500;1,6..12,600;1,6..12,700;1,6..12,800;1,6..12,900;1,6..12,1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
 
-    @livewireStyles
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+
+    <x-host.tinymce-config/>
+
+    @livewireStyles()
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="antialised bg-slate-950">
+<body class="antialised bg-slate-950 font-nunito">
     <livewire:toasts />
-    <nav class="bg-yellow-600">
+
+    <nav class="bg-yellow-600 sticky top-0 z-30">
         <div class="container mx-auto">
             <div class="py-1 mx-auto flex items-center justify-between w-[90%]">
                 <a href="" class="w-[7%]">
@@ -24,16 +35,16 @@
 
                 <ul class="flex items-center justify-center space-x-10">
                     <li>
-                        <a href="" class="text-xl font-semibold hover:text-red-800">Home</a>
+                        <a href="" class="text-xl font-semibold hover:text-red-800">Dashboard</a>
                     </li>
                     <li>
-                        <a href="" class="text-xl font-semibold hover:text-red-800">Shows</a>
+                        <a href="{{ route('host.genre') }}" class="text-xl font-semibold hover:text-red-800">Genres</a>
                     </li>
                     <li>
-                        <a href="" class="text-xl font-semibold hover:text-red-800">Articles</a>
+                        <a href="{{ route('host.show') }}" class="text-xl font-semibold hover:text-red-800">Shows</a>
                     </li>
                     <li>
-                        <a href="" class="text-xl font-semibold hover:text-red-800">Hosts</a>
+                        <a href="" class="text-xl font-semibold hover:text-red-800">Episodes</a>
                     </li>
                 </ul>
 
@@ -44,7 +55,7 @@
                                 <span class="bg-red-800 text-white px-4 py-2 rounded drop-shadow-sm uppercase transition-all hover:drop-shadow-lg">{{ auth()->user()->username }}</span>
                             </a>
 
-                            <div class="absolute top-0 mt-[60px] w-[190px] bg-yellow-600 flex justify-center rounded-b" x-show="profile" x-transition:enter-start="translate-x-full" x-transition:enter-end="-translate-x-0" x-transition:leave="transition ease-in duration-300 trasnform" x-transition:leave-start="-translate-x-0" x-transition:leave-end="translate-x-full" @click.outside="profile = false" x-cloak>
+                            <div class="absolute top-0 z-20 mt-[60px] w-[190px] bg-yellow-600 flex justify-center rounded-b" x-show="profile" x-transition:enter-start="translate-x-full" x-transition:enter-end="-translate-x-0" x-transition:leave="transition ease-in duration-300 trasnform" x-transition:leave-start="-translate-x-0" x-transition:leave-end="translate-x-full" @click.outside="profile = false" x-cloak>
                                 <ul class="w-full divide-y divide-red-800">
                                     <li class="block py-1.5 px-2.5">
                                         <a href="#" class="text-lg font-semibold flex items-center">
@@ -107,10 +118,14 @@
             </div>
         </div>
     </nav>
+
     <main>
         @yield('body')
+        <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+        @yield('scripts')
     </main>
 
-    @livewireScriptConfig
+
+    @livewireScriptConfig()
 </body>
 </html>

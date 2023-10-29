@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Host;
 
 use App\Models\Genre;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class GenreCreate extends Component
@@ -30,7 +30,6 @@ class GenreCreate extends Component
                 'slug' => Str::slug($this->name),
                 'user_id' => Auth::user()->id
             ]);
-
         } catch (\Throwable $th) {
 
             Log::error($th);
@@ -40,12 +39,11 @@ class GenreCreate extends Component
             ->success('Genre Created successfully')
             ->pushOnNextPage();
 
-        redirect()->route('admin.genre');
-
+        redirect()->route('host.genre');
     }
 
     public function render()
     {
-        return view('livewire.admin.genre-create');
+        return view('livewire.host.genre-create');
     }
 }

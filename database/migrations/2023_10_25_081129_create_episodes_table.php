@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('genres', function (Blueprint $table) {
+        Schema::create('episodes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('name')->unique();
-            $table->string('slug');
+            $table->foreignUuid('show_id')->references('id')->on('shows')->onDelete('cascade');
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->boolean('published');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('genres');
+        Schema::dropIfExists('episodes');
     }
 };

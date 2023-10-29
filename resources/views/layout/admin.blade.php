@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Blvck Admin</title>
 
     {{-- google fonts --}}
@@ -42,10 +43,10 @@
                     </a>
                 </li>
 
-                <li class="mt-5">
+                <li class="mt-7">
                     <small class="text-gray-200">Podcast</small>
                 </li>
-                <li class="block mt-2">
+                <li class="block py-1.5">
                     <a href="{{ route('admin.genre') }}" class="flex items-center space-x-2">
                         <span class="material-symbols-outlined">
                             category
@@ -53,13 +54,23 @@
                         <span class="font-semibold text-lg">Genres</span>
                     </a>
                 </li>
-                <li class="block py-2.5">
+                <li class="block py-1.5">
                     <a href="{{ route('admin.show') }}" class="flex items-center space-x-2">
                         <span class="material-symbols-outlined">
                             featured_play_list
                         </span>
                         <span class="font-semibold text-lg">
                             Shows
+                        </span>
+                    </a>
+                </li>
+                <li class="block py-1.5">
+                    <a href="{{ route('admin.episode') }}" class="flex items-center space-x-2">
+                        <span class="material-symbols-outlined">
+                            music_video
+                        </span>
+                        <span class="font-semibold text-lg">
+                            Episodes
                         </span>
                     </a>
                 </li>
@@ -115,8 +126,8 @@
             @yield('body')
         </div>
 
-        <div class="px-10">
-            <hr class="border-slate-300 my-5">
+        <div class="px-5">
+            <hr class="border-slate-300 mb-5">
 
             <div class="text-center pb-5">
                 <p class="text-center font-semibold text-gray-600 text-lg uppercase">Copywright &copy; 2023 Blvck Media. All Rights Reserved</p>

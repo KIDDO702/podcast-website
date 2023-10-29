@@ -1,3 +1,3 @@
 import './alpine';
 import './bootstrap';
-import './filepond.js';
+// import './filepond.js';

@@ -21,4 +21,9 @@ class AdminController extends Controller
     {
         return view('admin.show.index');
     }
+
+    public function episode(): View
+    {
+        return view('admin.episode.index');
+    }
 }

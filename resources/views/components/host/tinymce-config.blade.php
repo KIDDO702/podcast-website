@@ -5,7 +5,8 @@
             selector: 'textarea#description',
             plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-            height: 300,
+            content_css: 'tinymce-5-dark',
+            height: 400
         });
     </script>
 </div>

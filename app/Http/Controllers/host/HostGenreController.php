@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\host;
 
 use App\Models\Genre;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class GenreController extends Controller
+class HostGenreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,22 +31,7 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|min:5|string|unique:genres,name'
-        ]);
-
-        try {
-
-            Genre::create([
-                'name' => $validated['name'],
-                'slug' => Str::slug($validated['name'])
-            ]);
-
-        } catch (\Throwable $th) {
-
-            throw $th;
-
-        }
+        //
     }
 
     /**
@@ -60,11 +45,10 @@ class GenreController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(String $id): View
+    public function edit(string $slug)
     {
-        $genre = Genre::find($id);
-
-        // dd($genre);
+        $genre = Genre::where('slug', $slug)->first();
+        $userGenres = Auth::user()->genre;
 
         if (!$genre) {
 
@@ -72,18 +56,18 @@ class GenreController extends Controller
                 ->warning('No genre found')
                 ->pushOnNextPage();
 
-            return redirect(route('admin.genre'));
+            return redirect()->back();
         }
 
-        return view('admin.genre.edit', compact('genre'));
+        return view('host.genre.edit', compact('genre', 'userGenres'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(Request $request, string $slug)
     {
-        $genre = Genre::find($id);
+        $genre = Genre::where('slug', $slug)->first();
 
         if (!$genre) {
 
@@ -91,11 +75,11 @@ class GenreController extends Controller
                 ->warning('No genre found')
                 ->pushOnNextPage();
 
-            return redirect(route('admin.genre'));
+            return redirect(route('host.genre.edit'));
         }
 
         $validated = $request->validate([
-            'name' => 'required|min:3|string'
+            'name' => 'required|min:3|string|unique:genres,name'
         ]);
 
         $genre->name = $validated['name'];
@@ -108,32 +92,15 @@ class GenreController extends Controller
             ->success('Genre Updated Successfully')
             ->pushOnNextPage();
 
-        return redirect(route('admin.genre'));
+        return redirect(route('host.genre'));
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        $genre = Genre::find($id);
-
-        if (!$genre) {
-
-            toast()
-                ->warning('No genre found')
-                ->pushOnNextPage();
-
-            return redirect()->back();
-        }
-
-        $genre->delete();
-
-        toast()
-            ->success('Genre deleted successfully')
-            ->pushOnNextPage();
-
-        return redirect()->back();
+        //
     }
 }

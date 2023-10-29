@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Show::class);
     }
+
+    public function genre(): HasMany
+    {
+        return $this->hasMany(Genre::class);
+    }
 }

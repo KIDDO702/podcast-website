@@ -3,7 +3,7 @@
 
 @section('body')
     <div class="bg-white rounded drop-shadow-sm flex justify-between items-center py-2 px-4">
-        <h3 class="font-bold text-slate-900 text-2xl">Shows</h3>
+        <h3 class="font-bold text-slate-900 text-2xl">Episodes</h3>
 
 
         <ul class="flex items-center space-x-3">
@@ -19,7 +19,7 @@
 
             </li>
             <li>
-                <small class="text-gray-600 font-semibold">Shows</small>
+                <small class="text-gray-600 font-semibold">Episodes</small>
             </li>
         </ul>
     </div>
@@ -27,11 +27,11 @@
     <div class="mt-10 bg-white drop-shadow-sm rounded px-7 py-6">
         <div class="flex justify-between items-center">
             <div>
-                <h3>All shows</h3>
+                <h3>All Episodes</h3>
             </div>
 
             <div>
-                <a href="{{ route('admin.show.create') }}" class="bg-red-800 px-4 py-1.5 rounded text-white">
+                <a href="{{ route('admin.episode.create') }}" class="bg-red-800 px-4 py-1.5 rounded text-white">
                     Create New
                 </a>
             </div>
@@ -40,7 +40,7 @@
         <hr class="border-gray-200 my-7">
 
         <div class="mt-5">
-            <livewire:admin.show-table />
+            <livewire:admin.episode-table />
         </div>
     </div>
 @endsection
