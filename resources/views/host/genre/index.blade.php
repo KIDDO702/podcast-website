@@ -2,13 +2,13 @@
 
 @section('body')
     <section>
-        <div class="container mx-auto">
+        <div class="container mx-auto px-5 md:px-3 lg:px-0">
             <livewire:host.genre-create />
 
             <div class="bg-slate-700 w-full  p-7 mt-16 rounded">
                 <h3 class="text-slate-200 font-bold text-xl">My Genres</h3>
                 <hr class="border-slate-200 mt-3 mb-4">
-                <ul class="w-full grid grid-cols-4">
+                <ul class="w-full grid grid-cols-2 lg:grid-cols-4 gap-4">
                     @foreach ($userGenres as $genre)
                         <li class="block py-1.5">
                             <div class="flex items-center space-x-3">

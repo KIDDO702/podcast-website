@@ -26,20 +26,11 @@ class HostController extends Controller
         return view('host.genre.index', compact('userGenres'));
     }
 
-    public function genreEdit(string $slug)
+    public function episode(): View
     {
-        $genre = Genre::where('slug', $slug)->first();
-        $userGenres = Auth::user()->genre;
-
-        if (!$genre) {
-
-            toast()
-                ->warning('No genre found')
-                ->pushOnNextPage();
-
-            return redirect()->back();
-        }
-
-        return view('host.genre.edit', compact('genre', 'userGenres'));
+        $userShows = Auth::user()->show;
+        return view('host.episode.index', compact('userShows'));
     }
+
+    
 }

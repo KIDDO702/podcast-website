@@ -28,14 +28,14 @@
     <nav class="bg-yellow-600 sticky top-0 z-30">
         <div class="container mx-auto">
             <div class="py-1 mx-auto flex items-center justify-between w-[90%]">
-                <a href="" class="w-[7%]">
+                <a href="" class="w-[10%] lg:w-[7%]">
                     <img src="{{ asset('logo.png') }}" alt="logo" class="">
                 </a>
 
 
-                <ul class="flex items-center justify-center space-x-10">
+                <ul class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10">
                     <li>
-                        <a href="" class="text-xl font-semibold hover:text-red-800">Dashboard</a>
+                        <a href="{{ route('host.index') }}" class="text-xl font-semibold hover:text-red-800">Dashboard</a>
                     </li>
                     <li>
                         <a href="{{ route('host.genre') }}" class="text-xl font-semibold hover:text-red-800">Genres</a>
@@ -44,11 +44,11 @@
                         <a href="{{ route('host.show') }}" class="text-xl font-semibold hover:text-red-800">Shows</a>
                     </li>
                     <li>
-                        <a href="" class="text-xl font-semibold hover:text-red-800">Episodes</a>
+                        <a href="{{ route('host.episode') }}" class="text-xl font-semibold hover:text-red-800">Episodes</a>
                     </li>
                 </ul>
 
-                <div>
+                <div class="flex items-center space-x-5">
                     @auth
                         <div class="relative w-full flex justify-center" x-data="{ profile: false }">
                             <a class="cursor-pointer text-xl font-semibold flex justify-center" @click="profile = !profile">
@@ -114,17 +114,25 @@
                             </span>
                         </a>
                     @endauth
+                    <div class="lg:hidden">
+                        <button class="border-2 border-red-800 px-3 py-2.5 rounded text-red-800 font-semibold">
+                            menu
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
     <main>
+
         @yield('body')
-        <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
-        @yield('scripts')
+
     </main>
 
+
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+    @yield('scripts')
 
     @livewireScriptConfig()
 </body>

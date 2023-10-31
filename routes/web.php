@@ -83,6 +83,12 @@ Route::middleware('auth')->group( function() {
                 Route::get('/create', [HostShowController::class, 'create'])->name('host.show.create');
                 Route::post('/create', [HostShowController::class, 'store'])->name('host.show.store');
                 Route::get('e/{slug}', [HostShowController::class, 'edit'])->name('host.show.edit');
+                Route::put('e/{id}', [HostShowController::class, 'update'])->name('host.show.update');
+                Route::delete('d/{id}', [HostShowController::class, 'destroy'])->name('host.show.delete')->middleware('password.confirm');
+            });
+
+            Route::prefix('episode')->group( function () {
+                Route::get('/', [HostController::class, 'episode'])->name('host.episode');
             });
         });
     });
