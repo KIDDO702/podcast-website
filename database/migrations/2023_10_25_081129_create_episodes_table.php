@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->boolean('published');
+            $table->longText('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

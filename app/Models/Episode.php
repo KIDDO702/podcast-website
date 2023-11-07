@@ -17,7 +17,8 @@ class Episode extends Model implements HasMedia
     protected $fillable = [
         'title',
         'slug',
-        'published'
+        'published',
+        'description'
     ];
 
     public function registerMediaCollections(): void

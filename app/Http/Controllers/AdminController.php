@@ -26,4 +26,14 @@ class AdminController extends Controller
     {
         return view('admin.episode.index');
     }
+
+    public function role(): View
+    {
+        return view('admin.role.index');
+    }
+
+    public function permission(): View
+    {
+        return view('admin.permission.index');
+    }
 }

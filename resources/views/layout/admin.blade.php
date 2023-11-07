@@ -74,6 +74,30 @@
                         </span>
                     </a>
                 </li>
+
+                <li class="mt-7">
+                    <small class="text-gray-200">Roles & Permissions</small>
+                </li>
+                <li class="block py-1.5">
+                    <a href="{{ route('admin.role') }}" class="flex items-center space-x-2">
+                        <span class="material-symbols-outlined">
+                            lock_person
+                        </span>
+                        <span class="font-semibold text-lg">
+                            Roles
+                        </span>
+                    </a>
+                </li>
+                <li class="block py-1.5">
+                    <a href="{{ route('admin.permission') }}" class="flex items-center space-x-2">
+                        <span class="material-symbols-outlined">
+                            key
+                        </span>
+                        <span class="font-semibold text-lg">
+                            Permissions
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

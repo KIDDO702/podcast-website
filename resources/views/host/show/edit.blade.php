@@ -76,15 +76,15 @@
                             Edit show
                         </button>
                     </div>
-                    
+
                 </div>
             </form>
             <form action="{{ route('host.show.delete', $show->id) }}" method="POST" class="mt-5">
                 @csrf
                 @method('DELETE')
                 <button
-                            onclick="return confirm('Are you sure you want to delete this show?')" 
-                            class="bg-red-600 text-white p-3 rounded-full flex items-center justify-center border border-red-900">
+                    onclick="return confirm('Are you sure you want to delete this show?')"
+                    class="bg-red-600 text-white p-3 rounded-full flex items-center justify-center border border-red-900">
                     <span class="material-symbols-outlined">
                         delete
                     </span>

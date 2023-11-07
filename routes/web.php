@@ -1,15 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HostController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\Auth\RegisterUser;
 use App\Http\Controllers\EpisodeController;
+use App\Http\Controllers\admin\RoleController;
+use App\Http\Controllers\host\HostShowController;
 use App\Http\Controllers\host\HostGenreController;
 use App\Http\Controllers\Auth\AuthenticatedSession;
-use App\Http\Controllers\host\HostShowController;
+use App\Http\Controllers\host\HostEpisodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +35,7 @@ Route::post('/logout', [AuthenticatedSession::class, 'logout'])->name('logout');
 
 
 // Home
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 // Protected Routes
@@ -64,6 +65,17 @@ Route::middleware('auth')->group( function() {
                 Route::post('/create', [EpisodeController::class, 'store'])->name('admin.episode.store');
                 Route::get('e/{id}', [EpisodeController::class, 'edit'])->name('admin.episode.edit');
             });
+
+            Route::prefix('roles')->group( function() {
+                Route::get('/', [AdminController::class, 'role'])->name('admin.role');
+                Route::get('e/{id}', [RoleController::class, 'edit'])->name('admin.role.edit');
+                Route::put('e/{id}', [RoleController::class, 'update'])->name('admin.role.update');
+                Route::delete('d/{id}', [RoleController::class, 'destroy'])->name('admin.role.destroy');
+            });
+
+            Route::prefix('permissions')->group( function () {
+                Route::get('/', [AdminController::class, 'permission'])->name('admin.permission');
+            });
         });
     });
 
@@ -89,6 +101,11 @@ Route::middleware('auth')->group( function() {
 
             Route::prefix('episode')->group( function () {
                 Route::get('/', [HostController::class, 'episode'])->name('host.episode');
+                Route::get('{show}/create', [HostEpisodeController::class, 'create'])->name('host.episode.create');
+                Route::post('{show}/create', [HostEpisodeController::class, 'store'])->name('host.episode.store');
+                Route::get('e/{show}/{episode}', [HostEpisodeController::class, 'edit'])->name('host.episode.edit');
+                Route::put('e/{show}/{id}', [HostEpisodeController::class, 'update'])->name('host.episode.update');
+                Route::delete('d/{id}', [HostEpisodeController::class, 'destroy'])->name('host.episode.delete');
             });
         });
     });

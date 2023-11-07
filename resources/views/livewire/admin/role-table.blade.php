@@ -13,10 +13,6 @@
                 Per Page
             </p>
         </div>
-
-        <div class="w-[30%]">
-            <input type="text" wire:model='search' placeholder="Search Genre" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded focus:outline focus:outline-gray-300 focus:outline-offset-2 placeholder:text-sm">
-        </div>
     </div>
 
     <div class="mt-7 relative overflow-x-auto border border-gray-300 sm:rounded-lg">
@@ -30,13 +26,7 @@
                         </div>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Show Title
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Show
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Published
+                        Role Name
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Created At
@@ -47,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($episodes as $episode)
+                @foreach ($roles as $role)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="w-4 p-4">
                             <div class="flex items-center">
@@ -56,35 +46,21 @@
                             </div>
                         </td>
                         <th scope="row" class="px-6 py-2 text-black font-medium whitespace-nowrap">
-                            <a href="{{ route('admin.episode.edit', $episode->id) }}">
-                                {{ $episode->title }}
+                            <a href="{{ route('admin.role.edit', $role->id) }}">
+                                {{ $role->name }}
                             </a>
                         </th>
                         <td class="px-6 py-2">
-                            {{ $episode->show->title }}
-                        </td>
-                        <td class="px-6 py-2">
-                            @if($episode->published)
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            @else
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-700">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            @endif
-                        </td>
-                        <td class="px-6 py-2">
-                            <h2 class="font-bold text-gray-700">{{ $episode->created_at->toFormattedDateString() }}</h2>
-                            <small class="text-gray-500">{{ $episode->created_at->diffForHumans() }}</small>
+                            <h2 class="font-bold text-gray-700">{{ $role->created_at->toFormattedDateString() }}</h2>
+                            <small class="text-gray-500">{{ $role->created_at->diffForHumans() }}</small>
                         </td>
                         <td class="flex items-center px-6 py-2 space-x-3">
                         {{-- <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> --}}
-                            <form action="#" method="post">
+                            <form action="{{ route('admin.role.destroy', $role->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    onclick="return confirm('Are you sure you want to delete this episode?')"
+                                    onclick="return confirm('Are you sure you want to delete this genre?')"
                                     class="cursor-pointer bg-red-50 font-medium text-red-600 border border-red-400 p-2 flex items-center justify-between rounded-full hover:bg-red-100">
                                     <span class="material-symbols-outlined">
                                         delete
@@ -102,4 +78,3 @@
         {{-- {{ $genres->links() }} --}}
     </div>
 </div>
-
