@@ -36,4 +36,9 @@ class AdminController extends Controller
     {
         return view('admin.permission.index');
     }
+
+    public function user(): View
+    {
+        return view('admin.user.index');
+    }
 }

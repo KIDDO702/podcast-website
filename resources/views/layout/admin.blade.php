@@ -20,6 +20,25 @@
 
     <x-head.tinymce-config/>
 
+    {{-- filepond --}}
+    {{-- <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css" rel="stylesheet"/> --}}
+
+
+    {{-- filepond-plugins
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script> --}}
+
+
+     {{-- filepond --}}
+    {{-- <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script> --}}
+
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -95,6 +114,20 @@
                         </span>
                         <span class="font-semibold text-lg">
                             Permissions
+                        </span>
+                    </a>
+                </li>
+
+                <li class="mt-7">
+                    <small class="text-gray-200">Users</small>
+                </li>
+                <li class="block py-1.5">
+                    <a href="{{ route('admin.user') }}" class="flex items-center space-x-2">
+                        <span class="material-symbols-outlined">
+                            group
+                        </span>
+                        <span class="font-semibold text-lg">
+                            Users
                         </span>
                     </a>
                 </li>

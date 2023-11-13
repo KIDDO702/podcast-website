@@ -27,7 +27,7 @@
 
     <nav class="sticky top-0 z-30">
         <div class="bg-red-800 text-center py-0.5">
-            <p class="text-lg text-yellow-400 uppercase"><span class="font-bold">Note:</span> This is a demo system</p>
+            <p class="text-lg text-yellow-400 uppercase"><span class="font-bold">Note:</span> This is a demo web app</p>
         </div>
         <div class="bg-yellow-600">
             <div class="container mx-auto">

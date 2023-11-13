@@ -34,27 +34,60 @@
     </div>
 
     <div class="mt-10 bg-white p-7 drop-shadow-sm rounded">
-        <form action="{{ route('admin.role.update', $role->id) }}" method="POST">
-            @method('PUT')
-            @csrf
-            <div>
-                <input type="text" value="{{ $role->name }}" name="name" class="w-full bg-gray-50 border border-slate-200 rounded-sm px-4 py-2 focus:outline focus:outline-slate-400 focus:outline-offset-2">
-                @error('name')
-                    <small class="text-red-800 font-semibold">{{ $message }}</small>
-                @enderror
-            </div>
+        <div class="">
+            <form action="{{ route('admin.role.update', $role->id) }}" method="POST">
+                @method('PUT')
+                @csrf
+                <div>
+                    <input type="text" value="{{ $role->name }}" name="name" class="w-full bg-gray-50 border border-slate-200 rounded-sm px-4 py-2 focus:outline focus:outline-slate-400 focus:outline-offset-2">
+                    @error('name')
+                        <small class="text-red-800 font-semibold">{{ $message }}</small>
+                    @enderror
+                </div>
 
-            <div class="mt-7">
-                <button type="submit" class="bg-slate-900 text-white px-4 py-2 font-semibold rounded focus:ring focus:ring-slate-900 focus:ring-offset-2">
-                    Edit
-                </button>
-            </div>
-        </form>
+                <div class="mt-7">
+                    <button type="submit" class="bg-slate-900 text-white px-4 py-2 font-semibold rounded focus:ring focus:ring-slate-900 focus:ring-offset-2">
+                        Edit
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="mt-7">
+            <form action="{{ route('admin.role.permission', $role->id) }}" method="POST">
+                @csrf
+                <h3 class="font-semibold">Permissions</h3>
+                <div class="w-full mt-1.5">
+                    <select name="permissions[]" id="permissions" multiple class="z-10">
+                        @foreach ($permissions as $permission)
+                            <option value="{{ $permission->name }}">{{ $permission->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mt-7">
+                    <button type="submit" class="bg-slate-900 text-white px-4 py-2 font-semibold rounded focus:ring focus:ring-slate-900 focus:ring-offset-2">
+                        Assign Permissions
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div class="mt-10">
+    <div class="mt-36 -z-10">
         <div class="bg-white drop-shadow-sm px-7 py-6 rounded">
-            <livewire:admin.role-table />
+            <h3 class="text-xl font-semibold">Role Permissions</h3>
+            <hr class="mt-3 mb-5">
+            <div class="">
+                <livewire:admin.role-permission-table :role="$role" />
+            </div>
         </div>
     </div>
 @endsection
+
+
+@section('scripts')
+    <script>
+        new MultiSelectTag('permissions')
+    </script>
+@endsection
+

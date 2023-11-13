@@ -2,7 +2,7 @@
 
 @section('body')
     <div class="bg-white rounded drop-shadow-sm flex justify-between items-center py-2 px-4">
-        <h3 class="font-bold text-slate-900 text-2xl">Permissions</h3>
+        <h3 class="font-bold text-slate-900 text-2xl">Users</h3>
 
 
         <ul class="flex items-center space-x-3">
@@ -18,20 +18,30 @@
 
             </li>
             <li>
-                <small class="text-gray-600 font-semibold">Permissions</small>
+                <small class="text-gray-600 font-semibold">Users</small>
             </li>
         </ul>
     </div>
 
-    <div class="mt-10">
-        <div class="bg-white p-7 drop-shadow-sm rounded">
-            <livewire:admin.permission-create />
-        </div>
-    </div>
+    <div class="mt-10 bg-white drop-shadow-sm rounded px-7 py-6">
+        <div class="flex justify-between items-center">
+            <div>
+                <h3>All Users</h3>
+            </div>
 
-    <div class="mt-10">
-        <div class="bg-white drop-shadow-sm px-7 py-6 rounded">
-            <livewire:admin.permission-table />
+            @can('manage users')
+                <div>
+                    <a href="{{ route('admin.user.create') }}" class="bg-red-800 px-4 py-1.5 rounded text-white">
+                    Create New
+                    </a>
+                </div>
+            @endcan
+        </div>
+
+        <hr class="border-gray-200 my-7">
+
+        <div class="mt-5">
+            <livewire:admin.user-table />
         </div>
     </div>
 @endsection

@@ -9,9 +9,12 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\Auth\RegisterUser;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\admin\RoleController;
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\host\HostShowController;
 use App\Http\Controllers\host\HostGenreController;
 use App\Http\Controllers\Auth\AuthenticatedSession;
+use App\Http\Controllers\admin\PermissionController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\host\HostEpisodeController;
 
 /*
@@ -70,11 +73,23 @@ Route::middleware('auth')->group( function() {
                 Route::get('/', [AdminController::class, 'role'])->name('admin.role');
                 Route::get('e/{id}', [RoleController::class, 'edit'])->name('admin.role.edit');
                 Route::put('e/{id}', [RoleController::class, 'update'])->name('admin.role.update');
+                Route::post('e/{role}/permissions', [RoleController::class, 'givePermission'])->name('admin.role.permission');
+                Route::delete('d/{role}/permissions/{permission}', [RoleController::class, 'revokePermission'])->name('admin.role.permission.revoke');
                 Route::delete('d/{id}', [RoleController::class, 'destroy'])->name('admin.role.destroy');
             });
 
             Route::prefix('permissions')->group( function () {
                 Route::get('/', [AdminController::class, 'permission'])->name('admin.permission');
+                Route::get('e/{id}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
+                Route::put('e/{id}', [PermissionController::class, 'update'])->name('admin.permission.update');
+                Route::delete('d/{id}', [PermissionController::class, 'destroy'])->name('admin.permission.delete');
+            });
+
+            Route::prefix('users')->group( function() {
+                Route::get('/', [AdminController::class, 'user'])->name('admin.user');
+                Route::get('/create', [UserController::class, 'create'])->name('admin.user.create');
+                Route::post('/create', [UserController::class, 'store'])->name('admin.user.store');
+                Route::get('e/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
             });
         });
     });
@@ -113,4 +128,6 @@ Route::middleware('auth')->group( function() {
 
     Route::get('/confirm-password', [AuthenticatedSession::class, 'passwordView'])->name('password.confirm');
     Route::post('/confirm-password', [AuthenticatedSession::class, 'confirmPassword'])->name('confirmed');
+
+    Route::post('/tmp-upload', [FileUploadController::class, 'proccess'])->name('filepond.proccess');
 });
