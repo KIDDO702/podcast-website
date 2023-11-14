@@ -29,7 +29,7 @@
                 <h3>All Users</h3>
             </div>
 
-            @can('manage users')
+            @can('manage user')
                 <div>
                     <a href="{{ route('admin.user.create') }}" class="bg-red-800 px-4 py-1.5 rounded text-white">
                     Create New

@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -82,6 +83,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $roles = Role::all();
+        $permissions = Permission::all();
 
         if(!$user)
         {
@@ -92,7 +94,118 @@ class UserController extends Controller
             return back();
         }
 
-        return view('admin.user.edit', compact('user', 'roles'));
+        $rolePermissions = $user->getPermissionsViaRoles();
+        $userDirectPermissions = $user->permissions;
+        $allPermissions = $rolePermissions->merge($userDirectPermissions)->unique();
+
+        return view('admin.user.edit', compact('user', 'roles', 'permissions', 'allPermissions'));
+    }
+
+    public function assignRole(Request $request, string $id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+
+        if (!$user) {
+
+            toast()
+                ->warning('invalid user')
+                ->pushOnNextPage();
+
+            return back();
+        }
+
+        $request->validate([
+            'roles' => 'required|array',
+        ]);
+
+        $currentRoles = $user->getRoleNames()->toArray();
+        $newRoles = array_diff($request->input('roles'), $currentRoles);
+
+        $user->assignRole($newRoles);
+
+        toast()
+            ->success('Roles added successfullty to '.$user->name)
+            ->pushOnNextPage();
+
+        return back();
+    }
+
+    public function revokeRole(Request $request, string $id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+
+        if (!$user) {
+
+            toast()
+                ->warning('invalid user')
+                ->pushOnNextPage();
+
+            return back();
+        }
+
+        $role = Role::find($request->input('role'));
+
+        // Revoke specified roles from the user
+        $user->roles()->detach($role);
+
+        toast()
+            ->success('Roles successfullty removed to ' . $user->name)
+            ->pushOnNextPage();
+
+        return back();
+    }
+
+    public function assignPermission(Request $request, string $id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+
+        if (!$user) {
+
+            toast()
+                ->warning('invalid user')
+                ->pushOnNextPage();
+
+            return back();
+        }
+
+        $request->validate([
+            'permissions' => 'required|array'
+        ]);
+
+        $currentPermissions = $user->permissions->pluck('name')->toArray();
+        $newPermissions = array_diff($request->input('permissions'), $currentPermissions);
+
+        $user->givePermissionTo($newPermissions);
+
+        toast()
+            ->success('Permissions has been granted to '.$user->name)
+            ->pushOnNextPage();
+
+        return back();
+    }
+
+    public function revokePermission(Request $request, string $id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+
+        if (!$user) {
+
+            toast()
+                ->warning('invalid user')
+                ->pushOnNextPage();
+
+            return back();
+        }
+
+        $permission = Permission::find($request->input('permission'));
+
+        $user->revokePermissionTo($permission);
+
+        toast()
+            ->success('Permission has been revoked')
+            ->pushOnNextPage();
+
+        return back();
     }
 
     /**

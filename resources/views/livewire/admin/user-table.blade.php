@@ -82,6 +82,7 @@
                         </td>
                         <td class="px-6 py-2">
                             @if ($user->roles->count() > 0)
+                                <span class="text-green-600 bg-green-50 px-3 rounded-full text-sm">user</span>
                                 @foreach ($user->roles as $role)
                                     <span
                                         @if ($role->name === 'admin')

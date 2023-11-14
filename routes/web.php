@@ -90,6 +90,10 @@ Route::middleware('auth')->group( function() {
                 Route::get('/create', [UserController::class, 'create'])->name('admin.user.create');
                 Route::post('/create', [UserController::class, 'store'])->name('admin.user.store');
                 Route::get('e/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
+                Route::post('e/{id}/assign-role', [UserController::class, 'assignRole'])->name('admin.user.assign-role');
+                Route::delete('d/{id}/revoke-role', [UserController::class, 'revokeRole'])->name('admin.user.revoke-role');
+                Route::post('e/{id}/assign-permission', [UserController::class, 'assignPermission'])->name('admin.user.assign-permission');
+                Route::delete('d/{id}/revoke-permission', [UserController::class, 'revokePermission'])->name('admin.user.revoke-permission');
             });
         });
     });
