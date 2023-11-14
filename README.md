@@ -29,11 +29,58 @@ Check out the live demo of the Blvck Radio podcast website [here](#insert-demo-l
 
 ### Prerequisites
 
-- Node.js and npm installed on your machine.
+- PHP >= 8.2
+- Composer
+- Node.js and npm
 
 ### Installation
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/blvck-radio-demo.git
+    ```bash
+    git clone https://github.com/KIDDO702/podcast-website.git
+    ```
+
+2. Install dependencies:
+
+    ```bash
+    cd podcast-website
+    composer install
+    npm install && npm run dev
+    ```
+
+3. Configure the environment:
+
+    - Duplicate the `.env.example` file and rename it to `.env`.
+    - Configure your database and other settings in the `.env` file.
+
+4. Generate application key:
+
+    ```bash
+    php artisan key:generate
+    ```
+
+5. Run migrations:
+
+    ```bash
+    php artisan migrate --seed
+    ```
+
+6. Start the development server:
+
+    ```bash
+    php artisan serve
+    ```
+
+Visit [http://localhost:8000](http://localhost:8000) in your browser to view the demo podcast website.
+
+## Usage
+
+- Log in with appropriate roles (admin, host, user) to explore different functionalities.
+- Add podcast episodes, manage media, and enjoy the demo features.
+
+## Contributing
+
+Feel free to contribute by opening issues or pull requests. Your feedback is highly appreciated.
+
+
