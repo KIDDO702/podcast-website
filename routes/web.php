@@ -102,7 +102,7 @@ Route::middleware('auth')->group( function() {
         Route::prefix('host')->group( function() {
             Route::get('/', [HostController::class, 'index'])->name('host.index')->middleware('password.confirm');
 
-            Route::prefix('genre')->group( function () {
+            Route::middleware('can:create genre')->prefix('genre')->group( function () {
                 Route::get('/', [HostController::class, 'genre'])->name('host.genre');
                 Route::get('/e/{slug}', [HostGenreController::class, 'edit'])->name('host.genre.edit');
                 Route::put('e/{slug}', [HostGenreController::class, 'update'])->name('host.genre.update');

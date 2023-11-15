@@ -34,6 +34,7 @@ class PermissionSeeder extends Seeder
             'delete user',
             'access admin',
             'access host',
+            'manage podcast'
         ];
 
         foreach ($permissions as $permission) {

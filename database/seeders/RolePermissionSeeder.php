@@ -24,7 +24,8 @@ class RolePermissionSeeder extends Seeder
                 'delete episode',
                 'manage role',
                 'manage permission',
-                'manage user'
+                'manage user',
+                'manage podcast'
             ],
 
             'host' => [

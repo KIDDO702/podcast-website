@@ -15,7 +15,7 @@
         </div>
 
         <div class="w-[30%]">
-            <input type="text" wire:model='search' placeholder="Search Genre" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded focus:outline focus:outline-gray-300 focus:outline-offset-2 placeholder:text-sm">
+            <input type="text" wire:model='search' placeholder="Search Show" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded focus:outline focus:outline-gray-300 focus:outline-offset-2 placeholder:text-sm">
         </div>
     </div>
 
@@ -99,6 +99,6 @@
     </div>
 
     <div class="mt-10">
-        {{-- {{ $genres->links() }} --}}
+        {{ $shows->links() }}
     </div>
 </div>

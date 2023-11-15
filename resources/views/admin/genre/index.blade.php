@@ -24,15 +24,19 @@
         </ul>
     </div>
 
+    @can('create genre')
     <div class="mt-10">
         <div class="bg-white p-7 drop-shadow-sm rounded">
             <livewire:admin.genre-create />
         </div>
     </div>
+    @endcan
 
+    @can('manage genre')
     <div class="mt-10">
         <div class="bg-white drop-shadow-sm px-7 py-6 rounded">
             <livewire:admin.genre-table />
         </div>
     </div>
+    @endcan
 @endsection

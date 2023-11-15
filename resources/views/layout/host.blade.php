@@ -25,6 +25,9 @@
 <body class="antialised bg-slate-950 font-nunito">
     <livewire:toasts />
 
+    <div class="bg-red-800 text-center py-0.5">
+        <p class="text-lg text-yellow-400 uppercase"><span class="font-bold">Note:</span> This is a demo web app</p>
+    </div>
     <nav class="bg-yellow-600 sticky top-0 z-30">
         <div class="container mx-auto">
             <div class="py-1 mx-auto flex items-center justify-between w-[90%]">
@@ -37,9 +40,11 @@
                     <li>
                         <a href="{{ route('host.index') }}" class="text-xl font-semibold hover:text-red-800">Dashboard</a>
                     </li>
+                    @can('create genre')
                     <li>
                         <a href="{{ route('host.genre') }}" class="text-xl font-semibold hover:text-red-800">Genres</a>
                     </li>
+                    @endcan
                     <li>
                         <a href="{{ route('host.show') }}" class="text-xl font-semibold hover:text-red-800">Shows</a>
                     </li>

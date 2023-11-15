@@ -32,6 +32,8 @@ Check out the live demo of the Blvck Radio podcast website [here](#insert-demo-l
 - PHP >= 8.2
 - Composer
 - Node.js and npm
+- MySql
+- laravel >= 10 
 
 ### Installation
 

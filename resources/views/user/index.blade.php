@@ -19,9 +19,16 @@
         </div>
     </section>
 
-    <section class="py-10">
-        <div class="container">
-            <h3 class="text-yellow-400 text-3xl font-bold">Latest Episodes</h3>
+    <section class="py-16">
+        <div class="container px-5 md:px-3 lg:px-0">
+            <div class="w-full lg:flex lg:items-start lg:space-x-10 mt-5">
+                <div class="w-full lg:w-[70%]">
+                    <livewire:show-grid />
+                </div>
+                <div class="w-full lg:w-[30%] mt-10 lg:mt-0">
+                    <livewire:genres />
+                </div>
+            </div>
         </div>
     </section>
 @endsection

@@ -124,7 +124,7 @@
                                     Log In
                                 </span>
                             </a>
-                    @endauth
+                        @endauth
                     </div>
                 </div>
             </div>

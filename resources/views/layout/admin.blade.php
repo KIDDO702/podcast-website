@@ -44,7 +44,7 @@
 </head>
 <body class="antialiased bg-slate-50 flex font-poppins">
     <livewire:toasts />
-    <div class="w-[18%] h-screen fixed bg-slate-900">
+    <div class="hidden md:w-[20%] lg:w-[18%] h-screen md:block fixed bg-slate-900">
         <div class="w-full">
 
             <ul class="text-white mt-10 px-4">
@@ -62,6 +62,7 @@
                     </a>
                 </li>
 
+                @can('manage podcast')
                 <li class="mt-7">
                     <small class="text-gray-200">Podcast</small>
                 </li>
@@ -83,6 +84,7 @@
                         </span>
                     </a>
                 </li>
+                @endcan
                 <li class="block py-1.5">
                     <a href="{{ route('admin.episode') }}" class="flex items-center space-x-2">
                         <span class="material-symbols-outlined">
@@ -135,7 +137,7 @@
         </div>
     </div>
 
-    <div class="ml-[18%] w-full">
+    <div class="md:ml-[20%] lg:ml-[18%] w-full">
         <nav class="bg-white w-[100%]  drop-shadow-sm sticky top-0 z-20">
             <div class="w-[90%] mx-auto py-2 flex items-center justify-between">
                 <form action="#" class="flex items-center w-[30%]">
@@ -165,6 +167,11 @@
                             <li class="block py-1.5 px-4">
                                 <a href="#">Profile</a>
                             </li>
+                            @role('host')
+                            <li class="block py-1.5 px-4">
+                                <a href="{{ route('host.index') }}">Host</a>
+                            </li>
+                            @endrole
                             <li class="block py-1.5 px-4">
                                 <form action="{{ route('logout') }}" method="post">
                                     @csrf

@@ -30,11 +30,13 @@
                 <h3>All shows</h3>
             </div>
 
+            @can('create show')
             <div>
                 <a href="{{ route('admin.show.create') }}" class="bg-red-800 px-4 py-1.5 rounded text-white">
                     Create New
                 </a>
             </div>
+            @endcan
         </div>
 
         <hr class="border-gray-200 my-7">
