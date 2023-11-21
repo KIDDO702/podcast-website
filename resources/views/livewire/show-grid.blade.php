@@ -11,25 +11,32 @@
     </div>
     <div class="w-full mt-7 grid grid-cols-2 md:grid-cols-3 gap-5">
         @foreach ($shows as $show)
-            <div class="bg-gray-900 rounded drop-shadow">
-                <div class="p-3">
-                    <img src="{{ $show->getFirstMediaUrl('show_thumbnail') }}" alt="{{ $show->slug }}" class="rounded">
-                </div>
-                <div class="pb-4 px-4">
-                    <div class="flex items-center mt-2">
-                        <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-yellow-500">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            <span class="text-yellow-400 ml-2">{{ $show->user->name }}</span>
-                        </div>
+            <a href="{{ route('show', $show->slug) }}" class="group relative rounded overflow-hidden block bg-black">
+                <img
+                    alt="Developer"
+                    src="{{ $show->getFirstMediaUrl('show_thumbnail') }}"
+                    class="absolute rounded inset-0 h-full w-full object-cover opacity-75 transition-all group-hover:opacity-50 group-hover:scale-110"
+                />
 
+                <div class="relative p-4 sm:p-6 lg:p-8">
+                    <p class="text-lg p-1 text-center font-semibold bg-red-800 uppercase tracking-widest rounded text-yellow-400">
+                        {{ $show->title }}
+                    </p>
+
+                    <div class="mt-32 sm:mt-48 lg:mt-64">
+                        <div
+                            class="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
+                        >
+                            <p class="text-sm text-white">
+                                {{ Str::limit(strip_tags($show->description), 200, '...') }}
+                            </p>
+
+                            <p class="text-sm mt-2 font-bold text-yellow-400">{{ $show->user->name }}</p>
+                        </div>
                     </div>
-                    <h3 class="text-gray-100 text-2xl tracking-[1px] font-semibold my-3">{{ $show->title }}</h3>
-                    {{-- <span class="text-yellow-300 mt-1 text-sm">{{ $show->user->name }}</span> --}}
-                    <p class="text-sm text-white font-light">{{ Str::limit(strip_tags($show->description), 100, '...')}}</p>
                 </div>
-            </div>
+            </a>
+
         @endforeach
     </div>
 </div>

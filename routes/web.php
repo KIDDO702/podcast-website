@@ -37,10 +37,6 @@ Route::post('/register', [RegisterUser::class, 'store'])->name('auth.register');
 Route::post('/logout', [AuthenticatedSession::class, 'logout'])->name('logout');
 
 
-// Home
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
-
 // Protected Routes
 Route::middleware('auth')->group( function() {
 
@@ -135,3 +131,7 @@ Route::middleware('auth')->group( function() {
 
     Route::post('/tmp-upload', [FileUploadController::class, 'proccess'])->name('filepond.proccess');
 });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/{show}/', [HomeController::class, 'show'])->name('show');
+Route::get('litsen/{show}', [HomeController::class, 'litsen'])->name('show.litsen');

@@ -47,7 +47,7 @@
                                             Listen
                                         </span>
                                     </a>
-                                    <a href="#" class="flex items-center justify-center px-3 py-2 rounded-full bg-slate-700 text-gray-100 w-[20%] transition-all hover:drop-shadow-md text-xl">
+                                    <a href="{{ route('show', $show->slug) }}" class="flex items-center justify-center px-3 py-2 rounded-full bg-slate-700 text-gray-100 w-[20%] transition-all hover:drop-shadow-md text-xl">
                                         Details
                                     </a>
                                 </div>
