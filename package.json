@@ -14,7 +14,9 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@splidejs/splide": "^4.1.4",
         "alpinejs": "^3.13.1",
+        "amplitudejs": "^5.3.2",
         "filepond": "^4.30.4",
         "filepond-plugin-file-validate-size": "^2.2.8",
         "filepond-plugin-file-validate-type": "^1.2.8",

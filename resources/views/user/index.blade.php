@@ -37,7 +37,11 @@
 @section('scripts')
     <script>
         new Splide( '.splide', {
-            autoplay: true
+            autoplay: true,
+            rewind: true,
+            rewindSpeed: 1000,
+            speed: 500,
+            pauseOnHover: false,
         } ).mount();
     </script>
 @endsection

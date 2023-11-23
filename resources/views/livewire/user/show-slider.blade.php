@@ -3,7 +3,7 @@
         <div class="splide__track">
             <div class="splide__list">
                 @foreach ($shows as $show)
-                    <div class="splide__slide flex w-full" data-splide-interval="5000">
+                    <div class="splide__slide flex w-full" data-splide-interval="10000">
                         <div class="hidden w-[50%] h-full px-7 lg:flex lg:items-center">
                             <div class="w-full">
                                 <h3 class="text-5xl uppercase font-bold tracking-[3px]">{{ $show->title }}</h3>

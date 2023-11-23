@@ -80,7 +80,9 @@
                         </ul>
                     </div>
                     <div class="mt-10">
-                        <a href="{{ route('show.litsen', ['show' => $show->slug, 'ep' => $show->episode->first()->slug]) }}" class="bg-red-800 text-yellow-400 px-4 py-2 rounded-full">Litsen now</a>
+                        @if (count($show->episode))
+                            <a href="{{ route('show.litsen', ['show' => $show->slug, 'ep' => $show->episode->first()->slug]) }}" class="bg-red-800 text-yellow-400 px-4 py-2 rounded-full">Litsen now</a>
+                        @endif
                     </div>
                     <div class="mt-5"></div>
                 </div>

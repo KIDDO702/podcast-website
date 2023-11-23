@@ -16,7 +16,10 @@
 
 
     {{-- splider-css --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"> --}}
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.1/dist/amplitude.js"></script>
+
 
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])

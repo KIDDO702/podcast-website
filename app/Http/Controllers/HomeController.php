@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Episode;
 use App\Models\Show;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class HomeController extends Controller
         return view('user.show.index', compact('show'));
     }
 
-    public function litsen(string $slug): View
+    public function litsen(Request $request, string $slug): View
     {
         $show = Show::where('slug', $slug)->first();
 
@@ -43,8 +44,12 @@ class HomeController extends Controller
             return back();
         }
 
+        // Get the selected episode
+        $episodeSlug = $request->query('ep');
+        $selectedEpisode = Episode::where('slug', $episodeSlug)->first();
 
 
-        return view('user.show.litsen', compact('show'));
+
+        return view('user.show.litsen', compact('show', 'selectedEpisode'));
     }
 }
