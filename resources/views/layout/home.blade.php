@@ -14,12 +14,8 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-
-    {{-- splider-css --}}
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"> --}}
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.1/dist/amplitude.js"></script>
-
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css"              integrity="sha512-CIYsJUa3pr1eoXlZFroEI0mq0UIMUqNouNinjpCkSWo3Bx5NRlQ0OuC6DtEB/bDqUWnzXc1gs2X/g52l36N5iw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -28,7 +24,7 @@
     <livewire:toasts />
 
 
-    <nav class="sticky top-0 z-30">
+    <nav class="sticky top-0 z-30 drop-shadow">
         <div class="bg-red-800 text-center py-0.5">
             <p class="text-lg text-yellow-400 uppercase"><span class="font-bold">Note:</span> This is a demo web app</p>
         </div>
@@ -140,6 +136,8 @@
 
     {{-- splider-js --}}
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"
+        integrity="sha512-RWosNnDNw8FxHibJqdFRySIswOUgYhFxnmYO3fp+BgCU7gfo4z0oS7mYFBvaa8qu+axY39BmQOrhW3Tp70XbaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @yield('scripts')
     @livewireScriptConfig
 </body>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use BeyondCode\Comments\Traits\HasComments;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Episode extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, SoftDeletes, HasUuids;
+    use HasFactory, InteractsWithMedia, SoftDeletes, HasUuids, HasComments;
 
     protected $fillable = [
         'title',

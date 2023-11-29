@@ -44,7 +44,7 @@
                             {{ count($show->episode) }}
                         </span>
                     </div>
-                    <div class="my-5 md:my-7">
+                    <div class="my-3 md:my-5">
                         <p class="text-gray-200 font-light text-sm tracking-[1px] leading-6">{{ strip_tags($show->description) }}</p>
                     </div>
                     <div class="w-full">
