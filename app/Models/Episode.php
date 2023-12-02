@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use BeyondCode\Comments\Traits\HasComments;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;

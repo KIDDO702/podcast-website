@@ -1,4 +1,4 @@
-<div class="text-gray-300 lg:h-[500px]">
+<div class="text-gray-300">
     <div class="splide">
         <div class="splide__track">
             <div class="splide__list">

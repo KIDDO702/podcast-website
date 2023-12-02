@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade');
             $table->text('body');
-            $table->morphs('commentable');
+            $table->foreignUuid('episode_id')->references('id')->on('episodes')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
