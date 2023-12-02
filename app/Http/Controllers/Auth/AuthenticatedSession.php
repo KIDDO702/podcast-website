@@ -48,7 +48,7 @@ class AuthenticatedSession extends Controller
             ->success('Signed In Sussessfully')
             ->pushOnNextPage();
 
-        return redirect(route('home'));
+        return redirect()->intended();
     }
 
 

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Episode extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, SoftDeletes, HasUuids, HasComments;
+    use HasFactory, InteractsWithMedia, SoftDeletes, HasUuids;
 
     protected $fillable = [
         'title',

@@ -7,14 +7,15 @@ use App\Http\Controllers\ShowController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\Auth\RegisterUser;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\host\HostShowController;
 use App\Http\Controllers\host\HostGenreController;
 use App\Http\Controllers\Auth\AuthenticatedSession;
 use App\Http\Controllers\admin\PermissionController;
-use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\host\HostEpisodeController;
 
 /*
@@ -40,6 +41,7 @@ Route::post('/logout', [AuthenticatedSession::class, 'logout'])->name('logout');
 // Protected Routes
 Route::middleware('auth')->group( function() {
 
+    // Admin Routes
     Route::middleware('role:admin')->group( function () {
         Route::prefix('admin')->group( function () {
             Route::get('/', [AdminController::class, 'index'])->name('admin.index')->middleware('password.confirm');
@@ -94,6 +96,7 @@ Route::middleware('auth')->group( function() {
         });
     });
 
+    // Host Routes
     Route::middleware('role:host')->group(function () {
         Route::prefix('host')->group( function() {
             Route::get('/', [HostController::class, 'index'])->name('host.index')->middleware('password.confirm');
@@ -125,10 +128,14 @@ Route::middleware('auth')->group( function() {
         });
     });
 
+    // Comment Routes
+    Route::post('/{episode}/comment', [CommentController::class, 'comment'])->name('comment');
 
+    // Password Confrimation
     Route::get('/confirm-password', [AuthenticatedSession::class, 'passwordView'])->name('password.confirm');
     Route::post('/confirm-password', [AuthenticatedSession::class, 'confirmPassword'])->name('confirmed');
 
+    // Upload Route
     Route::post('/tmp-upload', [FileUploadController::class, 'proccess'])->name('filepond.proccess');
 });
 
