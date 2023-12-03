@@ -5,7 +5,7 @@
         <livewire:user.show-slider />
     </header>
 
-    <section class="mt-10">
+    <section class="mt-16">
         <div class="container px-5 md:px-3 lg:px-0">
             <div class="flex items-center bg-slate-800 drop-shadow-sm rounded p-3">
                 <div class="w-[20%] lg:w-[5%]">

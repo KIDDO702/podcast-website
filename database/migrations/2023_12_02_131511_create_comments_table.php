@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -13,9 +14,10 @@ return new class extends Migration {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('episode_id')->constrained('episodes')->onDelete('cascade');
             $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade');
+            $table->boolean('approved')->default(true);
             $table->text('body');
-            $table->foreignUuid('episode_id')->references('id')->on('episodes')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

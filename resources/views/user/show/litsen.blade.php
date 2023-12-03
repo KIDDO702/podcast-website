@@ -72,16 +72,21 @@
         </div>
     </section>
     <section class="w-full my-16">
-        <div class="container mx-auto">
+        <div class="container mx-auto px-5 md:px-3 lg:px-0">
             <div class="w-full">
-                <div class="w-[60%] bg-slate-800 rounded drop-shadow p-7">
-                    @auth
-                        
-                    @else
-                        <div class="w-full">
-                            <p class="text-gray-200 text-center font-semibold">You need to <a href="{{ route('login') }}" class="text-yellow-600 underline underline-offset-4">login</a> to comment</p>
-                        </div>
-                    @endauth
+                <div class="w-full lg:w-[60%] bg-slate-800 rounded drop-shadow p-7">
+                    <div class="w-full">
+                        <livewire:user.episode.comments :comments="$selectedEpisode->comments" />
+                    </div>
+                    <div class="w-full mt-10">
+                        @auth
+                            <livewire:user.episode.comment :episode="$selectedEpisode" />
+                        @else
+                            <div class="w-full">
+                                <p class="text-gray-200 text-center font-semibold">You need to <a href="{{ route('login') }}" class="text-yellow-600 underline underline-offset-4">login</a> to comment</p>
+                            </div>
+                        @endauth
+                    </div>
                 </div>
             </div>
         </div>

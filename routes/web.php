@@ -128,9 +128,6 @@ Route::middleware('auth')->group( function() {
         });
     });
 
-    // Comment Routes
-    Route::post('/{episode}/comment', [CommentController::class, 'comment'])->name('comment');
-
     // Password Confrimation
     Route::get('/confirm-password', [AuthenticatedSession::class, 'passwordView'])->name('password.confirm');
     Route::post('/confirm-password', [AuthenticatedSession::class, 'confirmPassword'])->name('confirmed');
