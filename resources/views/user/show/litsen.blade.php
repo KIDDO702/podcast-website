@@ -76,7 +76,13 @@
             <div class="w-full">
                 <div class="w-full lg:w-[60%] bg-slate-800 rounded drop-shadow p-7">
                     <div class="w-full">
-                        <livewire:user.episode.comments :comments="$selectedEpisode->comments" />
+                        @if(!count($selectedEpisode->comments) > 0)
+                            <div class="w-full">
+                                <p class="text-gray-200 text-center font-semibold">No comments currently</p>
+                            </div>
+                        @else
+                            <livewire:user.episode.comments :comments="$selectedEpisode->comments" />
+                        @endif
                     </div>
                     <div class="w-full mt-10">
                         @auth
