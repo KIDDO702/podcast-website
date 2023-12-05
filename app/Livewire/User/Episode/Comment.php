@@ -37,10 +37,11 @@ class Comment extends Component
         $showSlug = $this->episode->show->slug;
 
         $this->reset('body');
+        $this->episode->refresh();
 
-        toast()
-            ->success('Thank you for your comment')
-            ->pushOnNextPage();
+        // toast()
+        //     ->success('Thank you for your comment')
+        //     ->pushOnNextPage();
 
         redirect()->route('show.litsen', [
             'show' => $showSlug,

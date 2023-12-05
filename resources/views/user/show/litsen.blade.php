@@ -89,7 +89,7 @@
                             <livewire:user.episode.comment :episode="$selectedEpisode" />
                         @else
                             <div class="w-full">
-                                <p class="text-gray-200 text-center font-semibold">You need to <a href="{{ route('login') }}" class="text-yellow-600 underline underline-offset-4">login</a> to comment</p>
+                                <p class="text-gray-200 text-start font-semibold">You need to <a href="{{ route('login') }}" class="text-yellow-600 underline underline-offset-4">login</a> to comment</p>
                             </div>
                         @endauth
                     </div>
