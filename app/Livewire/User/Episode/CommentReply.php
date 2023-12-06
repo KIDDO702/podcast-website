@@ -25,6 +25,9 @@ class CommentReply extends Component
         $this->validate();
 
         $episodeId = $this->comment->episode->id;
+        $episodeSlug = $this->comment->episode->slug;
+
+        $showSlug = $this->comment->episode->show->slug;
 
         Comment::create([
             'user_id' => Auth::user()->id,
@@ -34,6 +37,11 @@ class CommentReply extends Component
         ]);
 
         $this->reset('body');
+
+        redirect()->route('show.litsen', [
+            'show' => $showSlug,
+            'ep' => $episodeSlug
+        ]);
     }
 
     public function render()

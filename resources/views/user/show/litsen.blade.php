@@ -78,10 +78,10 @@
                     <div class="w-full">
                         @if(!count($selectedEpisode->comments) > 0)
                             <div class="w-full">
-                                <p class="text-gray-200 text-center font-semibold">No comments currently</p>
+                                <p class="text-gray-200 text-start font-semibold">No comments currently</p>
                             </div>
                         @else
-                            <livewire:user.episode.comments :comments="$selectedEpisode->comments" />
+                            <livewire:user.episode.comments :episode="$selectedEpisode" />
                         @endif
                     </div>
                     <div class="w-full mt-10">

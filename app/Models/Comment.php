@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\CommentLikeDislike;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\MediaCollections\Models\Concerns\HasUuid;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Comment extends Model
 {
@@ -34,5 +34,20 @@ class Comment extends Model
     public function replies(): HasMany
     {
         return $this->hasMany(Comment::class, 'parent_id');
+    }
+
+    public function likesDislikes()
+    {
+        return $this->hasMany(CommentLikeDislike::class);
+    }
+
+    public function likes()
+    {
+        return $this->likesDislikes()->where('reaction', 'like');
+    }
+
+    public function dislikes()
+    {
+        return $this->likesDislikes()->where('reaction', 'dislike');
     }
 }
