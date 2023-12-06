@@ -23,10 +23,6 @@ class Comments extends Component
             // User has already liked, remove the like
             $comment->likesDislikes()->where('user_id', auth()->user()->id)->delete();
 
-            // redirect()->route('show.litsen', [
-            //     'show' => $showSlug,
-            //     'ep' => $this->episode->slug
-            // ]);
         }
         else {
 
@@ -37,10 +33,6 @@ class Comments extends Component
                 'reaction' => 'like'
             ]);
 
-            // redirect()->route('show.litsen', [
-            //     'show' => $showSlug,
-            //     'ep' => $this->episode->slug
-            // ]);
         }
 
     }
