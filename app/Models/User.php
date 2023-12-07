@@ -63,4 +63,14 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasMany(Genre::class);
     }
+
+    public function episodes(): HasMany
+    {
+        return $this->hasMany(Episode::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

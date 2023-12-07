@@ -23,6 +23,8 @@ class PermissionSeeder extends Seeder
             'create episode',
             'manage episode',
             'delete episode',
+            'approve comment',
+            'manage comment',
             'create role',
             'manage role',
             'delete role',
@@ -34,7 +36,7 @@ class PermissionSeeder extends Seeder
             'delete user',
             'access admin',
             'access host',
-            'manage podcast'
+            'manage podcast',
         ];
 
         foreach ($permissions as $permission) {

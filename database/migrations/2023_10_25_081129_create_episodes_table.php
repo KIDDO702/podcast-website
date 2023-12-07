@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('episodes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('show_id')->references('id')->on('shows')->onDelete('cascade');
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title');
             $table->string('slug')->unique();
             $table->boolean('published');
             $table->longText('description')->nullable();
+            $table->string('youtube_link')->nullable();
+            $table->string('spotify_link')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

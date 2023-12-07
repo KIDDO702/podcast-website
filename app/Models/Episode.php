@@ -16,10 +16,13 @@ class Episode extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, SoftDeletes, HasUuids;
 
     protected $fillable = [
+        'user_id',
         'title',
         'slug',
         'published',
-        'description'
+        'description',
+        'youtube_link',
+        'spotify_link'
     ];
 
     public function registerMediaCollections(): void
@@ -37,5 +40,10 @@ class Episode extends Model implements HasMedia
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class)->whereNull('parent_id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

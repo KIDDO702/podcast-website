@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('body')
-    <div class="bg-white rounded drop-shadow-sm flex justify-between items-center py-2 px-4">
+    <div class="bg-white rounded drop-shadow flex justify-between items-center py-2 px-4">
         <h3 class="font-bold text-slate-900 text-2xl">Episodes</h3>
 
 
@@ -37,36 +37,44 @@
         <form action="{{ route('admin.episode.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="flex space-x-7 items-start">
-                <div class="w-[70%]">
-                    <div class="w-full bg-white drop-shadow-sm rounded p-5">
+                <div class="w-[65%]">
+                    <div class="w-full bg-white drop-shadow rounded p-5">
                         <div class="w-full">
-                            <input type="text" name="title" placeholder="Title e.g. Episode 1" class="w-full bg-gray-50 border border-slate-300 px-4 py-2 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
+                            <label for="title" class="text-sm text-gray-700 font-semibold">Title</label>
+                            <input type="text" name="title" id="title" placeholder="The start of something great" class="w-full mt-1 bg-gray-50 border border-slate-300 px-4 py-2 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
                             @error('title')
                                 <small class="font-semibold text-red-800">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="mt-7">
-                            <select name="show" id="show" class="w-full bg-gray-50 border border-slate-300 px-4 py-2 rounded">
+                            <label for="show" class="text-sm text-gray-700 font-semibold">Show</label>
+                            <select name="show" id="show" class="w-full mt-1 bg-gray-50 border border-slate-300 px-4 py-2 rounded">
                                 {{-- <option selected>Show</option> --}}
                                 @foreach ($shows as $show)
                                     <option value="{{ $show->id }}">{{ $show->title }}</option>
                                 @endforeach
                             </select>
                         </div>
+                        <div class="mt-7">
+                            <textarea name="description" id="description" class="w-full bg-gray-50 border border-slate-300 px-4 py-2 rounded focus:outline focus:outline-slate-300 focus:outline-offset-2 placeholder:text-sm"></textarea>
+                            @error('description')
+                                <small class="text-red-800 font-semibold">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="w-full mt-7 bg-white drop-shadow-sm rounded p-5">
+                    <div class="w-full mt-10 bg-white drop-shadow rounded p-5">
                         <div class="w-full">
-                            <label for="thumbnail" class="font-semibold">Thumbnail</label>
+                            <label for="thumbnail" class="text-sm text-gray-700 font-semibold">Thumbnail</label>
                             <input type="file" id="thumbnail" name="thumbnail" class="w-full mt-1.5 bg-gray-50 border border-slate-300 px-4 py-2 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
                         </div>
                         <div class="w-full mt-7">
-                            <label for="audio" class="font-semibold">Audio File</label>
+                            <label for="audio" class="text-sm text-gray-700 font-semibold">Audio File</label>
                             <input type="file" id="audio" name="audio" class="w-full mt-1.5 bg-gray-50 border border-slate-300 px-4 py-2 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
                         </div>
                     </div>
                 </div>
-                <div class="w-[30%]">
-                    <div class="bg-white drop-shadow-sm w-full rounded p-5">
+                <div class="w-[35%]">
+                    <div class="bg-white drop-shadow w-full rounded p-5">
                         <div>
                             <h3>Featured</h3>
                         </div>
@@ -79,10 +87,21 @@
                             <h3 class="text-sm font-light mt-5">This show will be hidden from all podcast channels. </h3>
                         </div>
                     </div>
+
+                    <div class="mt-10 bg-white drop-shadow w-full rounded p-5">
+                        <div class="w-full">
+                            <label for="youtube_link" class="text-sm text-gray-700 font-semibold">Youtube Link</label>
+                            <input type="text" placeholder="https://youtu.be/yubiXndjoTc" name="youtube_link" id="youtube_link" class="w-full mt-1 bg-gray-50 border border-slate-300 px-4 py-1 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
+                        </div>
+                        <div class="w-full mt-5">
+                            <label for="spotify_link" class="text-sm text-gray-700 font-semibold">Spotify Link</label>
+                            <input type="text" placeholder="https://open.spotify.com/track/6hsrbTX1HKMtNC0KBdhjh7?si=92380fb2f20043da" name="spotify_link" id="spotify_link" class="w-full mt-1 bg-gray-50 border border-slate-300 px-4 py-1 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="mt-16">
+            <div class="mt-12">
                 <button type="submit" class="bg-red-800 text-white px-4 py-2.5 rounded focus:ring focus:ring-red-800 focus:ring-offset-2">
                     Create Episode
                 </button>

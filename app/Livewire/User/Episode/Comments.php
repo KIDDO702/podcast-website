@@ -11,38 +11,51 @@ class Comments extends Component
 {
     public $episode;
 
-    public function likeComment($commentId)
+    // The like and dislike functionality
+    public function toogleReaction($commentId, $reaction)
     {
-
+        // Get the comment and the user
         $comment = Comment::find($commentId);
-        $showSlug = $this->episode->show->slug;
+        $user = auth()->user();
 
-        // Check if comment exists
-        if($comment->likesDislikes()->where('user_id', auth()->user()->id)->where('reaction', 'like')->exists())
-        {
-            // User has already liked, remove the like
-            $comment->likesDislikes()->where('user_id', auth()->user()->id)->delete();
+        // Check if the user has already reacted to the comment
+        $existingReaction = $comment->likesDislikes()->where('user_id', $user->id)->first();
 
+        if ($existingReaction) {
+
+            // User has already reacted, toggle the reaction or remove it
+            if ($existingReaction->reaction === $reaction) {
+                $existingReaction->delete();
+            }
+            else {
+                $existingReaction->update([
+                    'reaction' => $reaction // Switch to the other reaction
+                ]);
+            }
         }
         else {
 
-            // Add the like
+            // User has not reacted add the reaction
             CommentLikeDislike::create([
-                'user_id' => Auth::user()->id,
+                'user_id' => $user->id,
                 'comment_id' => $commentId,
-                'reaction' => 'like'
+                'reaction' => $reaction
             ]);
 
         }
-
     }
 
     public function render()
     {
-        $comments = Comment::where('episode_id', $this->episode->id)
-                             ->whereNull('parent_id')
-                             ->orderBy('created_at', 'desc')
-                             ->get();
+        $comments = Comment::with([
+            'replies' => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }])
+            ->where('episode_id', $this->episode->id)
+            ->whereNull('parent_id')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return view('livewire.user.episode.comments', compact('comments'));
     }
 }

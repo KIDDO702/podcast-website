@@ -38,10 +38,17 @@ class EpisodeController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|min:5',
             'show' => 'required',
+            'description' => 'required',
+            'youtube_link' => 'nullable',
+            'spotify_link' => 'nullable',
         ]);
 
+        $episode->user_id = $request->user()->id;
         $episode->show_id = $validated['show'];
         $episode->title = $validated['title'];
+        $episode->description = $validated['description'];
+        $episode->youtube_link = $validated['youtube_link'];
+        $episode->spotify_link = $validated['spotify_link'];
 
         // Slug
         $slug = Str::slug($validated['title']);
