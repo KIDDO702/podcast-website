@@ -121,7 +121,7 @@
                                 <span class="material-symbols-outlined mr-2">
                                     person_add
                                 </span>
-                                <span>
+                                <span class="hidden md:block">
                                     Log In
                                 </span>
                             </a>

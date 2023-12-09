@@ -43,7 +43,7 @@ Route::middleware('auth')->group( function() {
 
     // Admin Routes
     Route::middleware('role:admin')->group( function () {
-        Route::prefix('admin')->group( function () {
+        Route::middleware('can:access admin')->prefix('admin')->group( function () {
             Route::get('/', [AdminController::class, 'index'])->name('admin.index')->middleware('password.confirm');
             Route::get('/genre', [AdminController::class, 'genre'])->name('admin.genre');
             Route::get('/genre/e/{id}', [GenreController::class, 'edit'])->name('admin.genre.edit');
@@ -53,18 +53,18 @@ Route::middleware('auth')->group( function() {
 
             Route::prefix('show')->group( function() {
                 Route::get('/', [AdminController::class, 'show'])->name('admin.show');
-                Route::get('/create', [ShowController::class, 'create'])->name('admin.show.create');
-                Route::post('/create', [ShowController::class, 'store'])->name('admin.show.store');
-                Route::get('/e/{id}', [ShowController::class, 'edit'])->name('admin.show.edit');
-                Route::put('e/{id}', [ShowController::class, 'update'])->name('admin.show.update');
-                Route::delete('d/{id}', [ShowController::class, 'destroy'])->name('admin.show.destroy');
+                Route::get('/create', [ShowController::class, 'create'])->name('admin.show.create')->middleware('can:create show');
+                Route::post('/create', [ShowController::class, 'store'])->name('admin.show.store')->middleware('can:create show');
+                Route::get('/e/{id}', [ShowController::class, 'edit'])->name('admin.show.edit')->middleware('can:manage show');
+                Route::put('e/{id}', [ShowController::class, 'update'])->name('admin.show.update')->middleware('can:manage show');
+                Route::delete('d/{id}', [ShowController::class, 'destroy'])->name('admin.show.destroy')->middleware('can:delete show');
             });
 
             Route::prefix('episode')->group( function () {
                 Route::get('/', [AdminController::class, 'episode'])->name('admin.episode');
-                Route::get('/create', [EpisodeController::class, 'create'])->name('admin.episode.create');
-                Route::post('/create', [EpisodeController::class, 'store'])->name('admin.episode.store');
-                Route::get('e/{id}', [EpisodeController::class, 'edit'])->name('admin.episode.edit');
+                Route::get('/create', [EpisodeController::class, 'create'])->name('admin.episode.create')->middleware('can:create episode');
+                Route::post('/create', [EpisodeController::class, 'store'])->name('admin.episode.store')->middleware('can:create episode');
+                Route::get('e/{id}', [EpisodeController::class, 'edit'])->name('admin.episode.edit')->middleware('can:manage episode');
             });
 
             Route::prefix('roles')->group( function() {
@@ -98,7 +98,7 @@ Route::middleware('auth')->group( function() {
 
     // Host Routes
     Route::middleware('role:host')->group(function () {
-        Route::prefix('host')->group( function() {
+        Route::middleware('can:access host')->prefix('host')->group( function() {
             Route::get('/', [HostController::class, 'index'])->name('host.index')->middleware('password.confirm');
 
             Route::middleware('can:create genre')->prefix('genre')->group( function () {
@@ -119,8 +119,8 @@ Route::middleware('auth')->group( function() {
 
             Route::prefix('episode')->group( function () {
                 Route::get('/', [HostController::class, 'episode'])->name('host.episode');
-                Route::get('{show}/create', [HostEpisodeController::class, 'create'])->name('host.episode.create');
-                Route::post('{show}/create', [HostEpisodeController::class, 'store'])->name('host.episode.store');
+                Route::get('{show}/create', [HostEpisodeController::class, 'create'])->name('host.episode.create')->middleware('can:create episode');
+                Route::post('{show}/create', [HostEpisodeController::class, 'store'])->name('host.episode.store')->middleware('can:create episode');
                 Route::get('e/{show}/{episode}', [HostEpisodeController::class, 'edit'])->name('host.episode.edit');
                 Route::put('e/{show}/{id}', [HostEpisodeController::class, 'update'])->name('host.episode.update');
                 Route::delete('d/{id}', [HostEpisodeController::class, 'destroy'])->name('host.episode.delete');

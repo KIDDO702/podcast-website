@@ -61,6 +61,8 @@ class HostEpisodeController extends Controller
             'description' => 'nullable',
             'thumbnail' => 'required|mimes:png,jpg,jpeg|max:2048|file|image',
             'audio' => 'required|file|mimes:mp3',
+            'youtube_link' => 'nullable',
+            'spotify_link' => 'nullable'
         ]);
 
         // Slug
@@ -75,10 +77,13 @@ class HostEpisodeController extends Controller
             'title' => $validated['title'],
             'slug' => $slug,
             'description' => $validated['description'],
-            'published' => $request->has('published')
+            'published' => $request->has('published'),
+            'youtube_link' => $validated['youtube_link'],
+            'spotify_link' => $validated['spotify_link']
         ]);
 
         $episode->show_id = $show->id;
+        $episode->user_id = $request->user()->id;
 
         // Audio and Thumbnail
         $episode->addMediaFromRequest('thumbnail')

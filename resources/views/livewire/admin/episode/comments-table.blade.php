@@ -1,4 +1,4 @@
-<div>
+<div class="w-full bg-white drop-shadow rounded p-7">
     <div class="flex items-center justify-between">
         <div class="flex items-center space-x-3 w-[20%]" x-data="{ paginate: @entangle('paginate') }">
             <p class="text-sm text-gray-700">
@@ -15,10 +15,10 @@
         </div>
 
         <div class="w-[30%]">
-            <input type="text" wire:model='search' placeholder="Search Genre" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded focus:outline focus:outline-gray-300 focus:outline-offset-2 placeholder:text-sm">
+            <input type="text" wire:model='search' placeholder="Search Comment" class="w-full px-4 py-2 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded focus:outline focus:outline-gray-300 focus:outline-offset-2 placeholder:text-sm placeholder:text-gray-700" x-model="search" @change="$wire.search(search)">
         </div>
     </div>
-
+    
     <div class="mt-7 relative overflow-x-auto border border-gray-300 sm:rounded-lg">
         <table class="w-full text-sm text-left">
             <thead class="uppercase bg-gray-100">
@@ -30,13 +30,13 @@
                         </div>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Show Title
+                        Body
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Show
+                        Comment's Owner
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Uploaded By
+                        Type
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Published
@@ -50,7 +50,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($episodes as $episode)
+                @foreach ($comments as $comment)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="w-4 p-4">
                             <div class="flex items-center">
@@ -59,18 +59,22 @@
                             </div>
                         </td>
                         <th scope="row" class="px-6 py-2 text-black font-medium whitespace-nowrap">
-                            <a href="{{ route('admin.episode.edit', $episode->id) }}" class="text-blue-900 underline underline-offset-2">
-                                {{ $episode->title }}
+                            <a href="{{ route('admin.episode.edit', $episode->id) }}">
+                                {{ $comment->body }}
                             </a>
                         </th>
                         <td class="px-6 py-2">
-                            {{ $episode->show->title }}
+                            {{ $comment->user->name }}
                         </td>
                         <td class="px-6 py-2">
-                            {{ $episode->user->name }}
+                            @if(!$comment->parent_id)
+                                <span class="text-sm rounded-full bg-green-200 text-green-900 px-2 py-0.5">parent</span>
+                            @else
+                                <span class="text-sm rounded-full bg-yellow-200 text-yellow-900 px-2 py-0.5">reply</span>
+                            @endif
                         </td>
                         <td class="px-6 py-2">
-                            @if($episode->published)
+                            @if($comment->approved)
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
@@ -81,8 +85,8 @@
                             @endif
                         </td>
                         <td class="px-6 py-2">
-                            <h2 class="font-bold text-gray-700">{{ $episode->created_at->toFormattedDateString() }}</h2>
-                            <small class="text-gray-500">{{ $episode->created_at->diffForHumans() }}</small>
+                            <h2 class="font-bold text-gray-700">{{ $comment->created_at->toFormattedDateString() }}</h2>
+                            <small class="text-gray-500">{{ $comment->created_at->diffForHumans() }}</small>
                         </td>
                         <td class="flex items-center px-6 py-2 space-x-3">
                         {{-- <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> --}}
@@ -105,7 +109,6 @@
     </div>
 
     <div class="mt-10">
-        {{-- {{ $genres->links() }} --}}
+        {{ $comments->links() }}
     </div>
 </div>
-

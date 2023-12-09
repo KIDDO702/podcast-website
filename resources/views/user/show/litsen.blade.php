@@ -2,7 +2,7 @@
 
 @section('body')
     <section class="w-full py-10 bg-gray-800 drop-shadow">
-        <div class="w-[95%] mx-auto">
+        <div class="w-[95%] mx-auto" x-data="{ description: false }">
             <div>
                 <ul class="flex items-center text-white space-x-3">
                     <li>
@@ -27,8 +27,7 @@
                 </ul>
             </div>
 
-
-            <div class="w-full lg:flex lg:space-x-5 mt-10">
+            <div class="w-full lg:flex lg:space-x-7 mt-10">
                 <div class="lg:w-[80%] grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-7">
                     @php
                         $count = 1;
@@ -44,15 +43,59 @@
                                 <h3 class="text-gray-200 font-bold text-xl tracking-[2px] uppercase">{{ $selectedEpisode->title }}</h3>
                             </div>
                             <div class="my-5 rounded" id="aplayer"></div>
-                            <div class="w-full p-3 rounded drop-shadow bg-gray-800">
-                                <p class="text-gray-200 text-xs font-light leading-6">{{ strip_tags($selectedEpisode->description) }}</p>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="lg:w-[20%] mt-7 lg:mt-0">
-                    <div class="w-full">
-                        <img src="{{ $selectedEpisode->getFirstMediaUrl('episode_thumbnail') }}" alt="{{ $show->slug }}" class="w-[50%] mx-auto">
+                    <div class="w-[30%]">
+                        <img src="{{ $show->getFirstMediaUrl('show_thumbnail') }}" alt="{{ $show->slug }}" class="w-full rounded">
+                    </div>
+                    <div class="w-full mt-3">
+                        <h3 class="text-gray-200 font-semibold text-xl">Rate this show</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10">
+                <a class="cursor-pointer mt-10 font-semibold text-yellow-600 text-sm flex items-center" @click="description = !description">
+                    <span>Description</span> 
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+
+                </a>
+            </div>
+
+            <div class="w-full mt-3" x-show="description" x-cloak x-transition @click="description = false">
+                <div class="lg:w-[80%] bg-slate-950 p-7 rounded drop-shadow text-sm text-gray-300 lg:flex lg:items-start lg:space-x-7">
+                    <div class="w-full lg:w-[20%]">
+                        <img src="{{ $selectedEpisode->getFirstMediaUrl('episode_thumbnail') }}" class="rounded mx-auto w-[75%] lg:w-full">
+                    </div>
+                    <div class="w-full mt-5 lg:w-[80%] lg:mt-0">
+                        {!! $selectedEpisode->description !!}
+
+                        @if( $selectedEpisode->youtube_link || $selectedEpisode->spotify_link )
+                        <div class="w-full mt-3">
+                            <h3 class="font-semibold text-xl">Litsen to this episode on:</h3>
+
+                            <ul class="flex items-center mt-1 space-x-3">
+                                @if( $selectedEpisode->youtube_link )
+                                <li>
+                                    <a href="{{ $selectedEpisode->youtube_link }}" class="text-red-600 text-3xl" target="_blank">
+                                        <i class="fa-brands fa-youtube"></i>
+                                    </a>
+                                </li>
+                                @endif
+                                @if( $selectedEpisode->spotify_link )
+                                <li>
+                                    <a href="{{ $selectedEpisode->spotify_link }}" class="text-green-600 text-3xl" target="_blank">
+                                        <i class="fa-brands fa-spotify"></i>
+                                    </a>
+                                </li>
+                                @endif
+                            </ul>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -109,7 +152,7 @@
             theme: '#1f2937',
             audio: [{
                 name: '{{ $selectedEpisode->title }}',
-                artist: '{{ $selectedEpisode->show->user->name }}',
+                artist: '{{ $selectedEpisode->user->name }}',
                 url: '{{ $selectedEpisode->getFirstMediaUrl('audio') }}',
                 cover: '{{ $selectedEpisode->getFirstMediaUrl('episode_thumbnail') }}',
             }]

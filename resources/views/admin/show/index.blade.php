@@ -2,7 +2,7 @@
 
 
 @section('body')
-    <div class="bg-white rounded drop-shadow-sm flex justify-between items-center py-2 px-4">
+    <div class="bg-white rounded drop-shadow flex justify-between items-center py-2 px-4">
         <h3 class="font-bold text-slate-900 text-2xl">Shows</h3>
 
 
@@ -24,7 +24,7 @@
         </ul>
     </div>
 
-    <div class="mt-10 bg-white drop-shadow-sm rounded px-7 py-6">
+    <div class="mt-10 bg-white drop-shadow rounded px-7 py-6">
         <div class="flex justify-between items-center">
             <div>
                 <h3>All shows</h3>

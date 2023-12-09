@@ -56,7 +56,7 @@
                             </div>
                         </td>
                         <th scope="row" class="px-6 py-2 text-black font-medium whitespace-nowrap">
-                            <a href="{{ route('admin.show.edit', $show->id) }}">
+                            <a href="{{ route('admin.show.edit', $show->id) }}" class="underline underline-offset-2 text-blue-900">
                                 {{ $show->title }}
                             </a>
                         </th>

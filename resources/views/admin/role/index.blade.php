@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('body')
-    <div class="bg-white rounded drop-shadow-sm flex justify-between items-center py-2 px-4">
+    <div class="bg-white rounded drop-shadow flex justify-between items-center py-2 px-4">
         <h3 class="font-bold text-slate-900 text-2xl">Roles</h3>
 
 
@@ -23,14 +23,16 @@
         </ul>
     </div>
 
+    @can('create role')
     <div class="mt-10">
-        <div class="bg-white p-7 drop-shadow-sm rounded">
+        <div class="bg-white p-7 drop-shadow rounded">
             <livewire:admin.create-role />
         </div>
     </div>
+    @endcan
 
     <div class="mt-10">
-        <div class="bg-white drop-shadow-sm px-7 py-6 rounded">
+        <div class="bg-white drop-shadow px-7 py-6 rounded">
             <livewire:admin.role-table />
         </div>
     </div>
