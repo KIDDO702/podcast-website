@@ -65,6 +65,7 @@ Route::middleware('auth')->group( function() {
                 Route::get('/create', [EpisodeController::class, 'create'])->name('admin.episode.create')->middleware('can:create episode');
                 Route::post('/create', [EpisodeController::class, 'store'])->name('admin.episode.store')->middleware('can:create episode');
                 Route::get('e/{id}', [EpisodeController::class, 'edit'])->name('admin.episode.edit')->middleware('can:manage episode');
+                Route::put('e/{id}', [EpisodeController::class, 'update'])->name('admin.episode.update')->middleware('can:manage episode');
             });
 
             Route::prefix('roles')->group( function() {

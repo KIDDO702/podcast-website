@@ -157,21 +157,27 @@ class HostEpisodeController extends Controller
             'description' => 'nullable',
             'thumbnail' => 'mimes:png,jpg,jpeg|max:2048|file|image',
             'audio' => 'file|mimes:mp3',
+            'youtube_link' => 'nullable',
+            'spotify_link' => 'nullable'
         ]);
 
         $episode->title = $validated['title'];
 
         // Slug
         $slug = Str::slug($validated['title']);
-        $count = Episode::where('slug', $slug)->count();
+        $count = Episode::where('slug', $slug)
+                          ->where('id', '!=', $episode->id)
+                          ->count();
+        // Check if slug exists
         if ($count > 0) {
-            // Append a number to make the slug unique
             $slug = $slug . '-' . ($count + 1);
         }
 
         $episode->slug = $slug;
         $episode->description = $validated['description'];
         $episode->published = $request->has('published');
+        $episode->youtube_link = $validated['youtube_link'];
+        $episode->spotify_link = $validated['spotify_link'];
         $episode->show_id = $show->id;
 
         // Update the thumbnail and audio

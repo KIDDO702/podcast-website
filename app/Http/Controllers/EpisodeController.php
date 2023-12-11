@@ -85,7 +85,7 @@ class EpisodeController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -114,7 +114,56 @@ class EpisodeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $episode = Episode::find($id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|min:5',
+            'show' => 'required',
+            'description' => 'required',
+            'youtube_link' => 'nullable',
+            'spotify_link' => 'nullable',
+        ]);
+
+        $episode->user_id = $request->user()->id;
+        $episode->show_id = $validated['show'];
+        $episode->title = $validated['title'];
+        $episode->description = $validated['description'];
+        $episode->youtube_link = $validated['youtube_link'];
+        $episode->spotify_link = $validated['spotify_link'];
+
+        // Slug
+        $slug = Str::slug($validated['title']);
+        $count = Episode::where('slug', $slug)
+            ->where('id', '!=', $episode->id)
+            ->count();
+
+        // Check if slug exists
+        if ($count > 0) {
+            $slug = $slug . '-' . ($count + 1);
+        }
+        $episode->slug = $slug;
+        $episode->published = $request->has('published');
+
+        // Update the thumbnail and audio
+        if ($request->hasFile('thumbnail')) {
+            $episode->clearMediaCollection('episode_thumbnail');
+            $episode->addMediaFromRequest('thumbnail')
+            ->toMediaCollection('episode_thumbnail');
+        }
+
+        if ($request->hasFile('audio')) {
+            $episode->clearMediaCollection('audio');
+            $episode->addMediaFromRequest('audio')
+                ->toMediaCollection('audio');
+        }
+
+        $episode->update();
+
+        toast()
+            ->success($episode->title . ' ' . 'updated successfully')
+            ->pushOnNextPage();
+
+        return redirect(route('admin.episode.update', $episode->id));
     }
 
     /**

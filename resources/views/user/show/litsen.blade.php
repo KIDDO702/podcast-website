@@ -33,7 +33,7 @@
                         $count = 1;
                     @endphp
                     <div class="bg-slate-950 p-4 drop-shadow rounded grid grid-cols-5 gap-3">
-                        @foreach ($show->episode as $episode)
+                        @foreach ($show->episode->where('published', true) as $episode)
                             <a href="{{ route('show.litsen', ['show' => $show->slug, 'ep' => $episode->slug]) }}" class="bg-yellow-600 text-red-800 font-semibold text-xl flex items-center justify-center rounded drop-shadow">{{ $count++ }}</a>
                         @endforeach
                     </div>
@@ -118,7 +118,8 @@
         <div class="container mx-auto px-5 md:px-3 lg:px-0">
             <div class="w-full">
                 <div class="w-full lg:w-[60%] bg-slate-800 rounded drop-shadow p-7">
-                    <div class="w-full">
+                    <h3 class="text-xl uppercase font-semibold text-gray-200">Ep: <span class="text-yellow-400">{{ $selectedEpisode->title }}</span></h3>
+                    <div class="w-full mt-7">
                         @if(!count($selectedEpisode->comments) > 0)
                             <div class="w-full">
                                 <p class="text-gray-200 text-start font-semibold">No comments currently</p>

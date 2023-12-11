@@ -4,7 +4,6 @@
     <div class="bg-white rounded drop-shadow flex justify-between items-center py-2 px-4">
         <h3 class="font-bold text-slate-900 text-2xl">Episodes</h3>
 
-
         <ul class="flex items-center space-x-3">
             <li>
                 <a href="{{ route('admin.index') }}" class="text-red-800 underline underline-offset-1">
@@ -34,7 +33,8 @@
     </div>
 
     <div class="mt-10">
-        <form action="{{ route('admin.episode.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.episode.update', $episode->id) }}" method="POST" enctype="multipart/form-data">
+            @method('PUT')
             @csrf
             <div class="lg:flex lg:space-x-7 lg:items-start">
                 <div class="lg:w-[65%] w-full">
@@ -94,7 +94,7 @@
                         </div>
                         <div class="w-full mt-2">
                             <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" name="published" value="1" class="sr-only peer" {{ $show->published ? 'checked' : '' }}>
+                                <input type="checkbox" name="published" value="1" class="sr-only peer" {{ $episode->published ? 'checked' : '' }}>
                                 <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-red-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-800"></div>
                                 <span class="ml-3 text-sm font-medium text-gray-900">Visible</span>
                             </label>
@@ -105,11 +105,11 @@
                     <div class="mt-10 bg-white drop-shadow w-full rounded p-5">
                         <div class="w-full">
                             <label for="youtube_link" class="text-sm text-gray-700 font-semibold">Youtube Link</label>
-                            <input type="text" name="youtube_link" value="{{ $episode->youtube_link }}" id="youtube_link" class="w-full mt-1 bg-gray-50 border border-slate-300 px-4 py-1 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
+                            <input type="text" name="youtube_link" value="{{ $episode->youtube_link }}" id="youtube_link" class="w-full text-sm text-gray-700 mt-1 bg-gray-50 border border-slate-300 px-4 py-1 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
                         </div>
                         <div class="w-full mt-5">
                             <label for="spotify_link" class="text-sm text-gray-700 font-semibold">Spotify Link</label>
-                            <input type="text" value="{{ $episode->spotify_link }}" name="spotify_link" id="spotify_link" class="w-full mt-1 bg-gray-50 border border-slate-300 px-4 py-1 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
+                            <input type="text" value="{{ $episode->spotify_link }}" name="spotify_link" id="spotify_link" class="w-full text-sm text-gray-700 mt-1 bg-gray-50 border border-slate-300 px-4 py-1 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
                         </div>
                     </div>
                 </div>

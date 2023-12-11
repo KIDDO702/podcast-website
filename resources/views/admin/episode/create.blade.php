@@ -91,11 +91,11 @@
                     <div class="mt-10 bg-white drop-shadow w-full rounded p-5">
                         <div class="w-full">
                             <label for="youtube_link" class="text-sm text-gray-700 font-semibold">Youtube Link</label>
-                            <input type="text" placeholder="https://youtu.be/yubiXndjoTc" name="youtube_link" id="youtube_link" class="w-full mt-1 bg-gray-50 border border-slate-300 px-4 py-1 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
+                            <input type="text" placeholder="https://youtu.be/yubiXndjoTc" name="youtube_link" id="youtube_link" class="w-full text-sm text-gray-700 mt-1 bg-gray-50 border border-slate-300 px-4 py-1 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
                         </div>
                         <div class="w-full mt-5">
                             <label for="spotify_link" class="text-sm text-gray-700 font-semibold">Spotify Link</label>
-                            <input type="text" placeholder="https://open.spotify.com/track/6hsrbTX1HKMtNC0KBdhjh7?si=92380fb2f20043da" name="spotify_link" id="spotify_link" class="w-full mt-1 bg-gray-50 border border-slate-300 px-4 py-1 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
+                            <input type="text" placeholder="https://open.spotify.com/track/6hsrbTX1HKMtNC0KBdhjh7?si=92380fb2f20043da" name="spotify_link" id="spotify_link" class="w-full text-sm text-gray-700 mt-1 bg-gray-50 border border-slate-300 px-4 py-1 rounded focus:outline focus:outline-gray-400 focus:outline-offset-2 placeholder:text-sm">
                         </div>
                     </div>
                 </div>
