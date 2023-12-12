@@ -45,9 +45,9 @@
 <body class="antialiased bg-slate-50 flex font-poppins">
     <livewire:toasts />
     <div class="hidden md:w-[20%] lg:w-[18%] h-screen md:block fixed bg-slate-900">
-        <div class="w-full">
+        <div class="w-full h-full">
 
-            <ul class="text-white mt-10 px-4">
+            <ul class="text-white mt-10 px-4 h-full relative">
                 <li>
                     <small class="text-gray-200">Home</small>
                 </li>
@@ -109,6 +109,7 @@
                         </span>
                     </a>
                 </li>
+                @can('manage permission')
                 <li class="block py-1.5">
                     <a href="{{ route('admin.permission') }}" class="flex items-center space-x-2">
                         <span class="material-symbols-outlined">
@@ -119,6 +120,7 @@
                         </span>
                     </a>
                 </li>
+                @endcan
 
                 <li class="mt-7">
                     <small class="text-gray-200">Users</small>
@@ -133,12 +135,24 @@
                         </span>
                     </a>
                 </li>
+
+
+                <li class="block py-1.5 absolute bottom-14">
+                    <a href="{{ route('admin.trash') }}" class="flex items-center space-x-2">
+                        <span class="material-symbols-outlined">
+                            recycling
+                        </span>
+                        <span class="font-semibold text-lg">
+                            Trash
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
 
     <div class="md:ml-[20%] lg:ml-[18%] w-full">
-        <nav class="bg-white w-[100%]  drop-shadow-sm sticky top-0 z-20">
+        <nav class="bg-white w-[100%]  drop-shadow sticky top-0 z-20">
             <div class="w-[90%] mx-auto py-2 flex items-center justify-between">
                 <form action="#" class="flex items-center w-[30%]">
                     <div class="w-full flex items-center">
@@ -161,7 +175,7 @@
                         <ul class="absolute divide-y divide-slate-100 bg-white border border-slate-100 mt-[39px] w-[150px]" x-show="dropdown" x-cloak @click.outside="dropdown = false">
                             <li class="block py-1.5 px-4">
                                 <a href="{{ route('home') }}">
-                                    User
+                                    Home
                                 </a>
                             </li>
                             <li class="block py-1.5 px-4">

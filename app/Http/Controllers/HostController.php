@@ -11,6 +11,10 @@ class HostController extends Controller
 {
     public function index(): View
     {
+        // toast()
+        //     ->info('Signed is as host')
+        //     ->pushOnNextPage();
+
         return view('host.index');
     }
 
@@ -32,5 +36,5 @@ class HostController extends Controller
         return view('host.episode.index', compact('userShows'));
     }
 
-    
+
 }

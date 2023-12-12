@@ -12,8 +12,10 @@ use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\admin\TrashController;
 use App\Http\Controllers\host\HostShowController;
 use App\Http\Controllers\host\HostGenreController;
+use App\Http\Controllers\host\HostTrashController;
 use App\Http\Controllers\Auth\AuthenticatedSession;
 use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\host\HostEpisodeController;
@@ -78,7 +80,7 @@ Route::middleware('auth')->group( function() {
             });
 
             Route::prefix('permissions')->group( function () {
-                Route::get('/', [AdminController::class, 'permission'])->name('admin.permission');
+                Route::get('/', [AdminController::class, 'permission'])->name('admin.permission')->middleware('can:manage permission');
                 Route::get('e/{id}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
                 Route::put('e/{id}', [PermissionController::class, 'update'])->name('admin.permission.update');
                 Route::delete('d/{id}', [PermissionController::class, 'destroy'])->name('admin.permission.delete');
@@ -89,10 +91,14 @@ Route::middleware('auth')->group( function() {
                 Route::get('/create', [UserController::class, 'create'])->name('admin.user.create');
                 Route::post('/create', [UserController::class, 'store'])->name('admin.user.store');
                 Route::get('e/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
-                Route::post('e/{id}/assign-role', [UserController::class, 'assignRole'])->name('admin.user.assign-role');
-                Route::delete('d/{id}/revoke-role', [UserController::class, 'revokeRole'])->name('admin.user.revoke-role');
-                Route::post('e/{id}/assign-permission', [UserController::class, 'assignPermission'])->name('admin.user.assign-permission');
-                Route::delete('d/{id}/revoke-permission', [UserController::class, 'revokePermission'])->name('admin.user.revoke-permission');
+                Route::post('e/{id}/assign-role', [UserController::class, 'assignRole'])->name('admin.user.assign-role')->middleware('can:assign role');
+                Route::delete('d/{id}/revoke-role', [UserController::class, 'revokeRole'])->name('admin.user.revoke-role')->middleware('can:revoke permission');
+                Route::post('e/{id}/assign-permission', [UserController::class, 'assignPermission'])->name('admin.user.assign-permission')->middleware('can:assign role');
+                Route::delete('d/{id}/revoke-permission', [UserController::class, 'revokePermission'])->name('admin.user.revoke-permission')->middleware('can:revoke permission');
+            });
+
+            Route::prefix('trash')->group( function () {
+                Route::get('/', [TrashController::class, 'index'])->name('admin.trash');
             });
         });
     });
@@ -126,6 +132,12 @@ Route::middleware('auth')->group( function() {
                 Route::put('e/{show}/{id}', [HostEpisodeController::class, 'update'])->name('host.episode.update');
                 Route::delete('d/{id}', [HostEpisodeController::class, 'destroy'])->name('host.episode.delete');
             });
+
+            Route::prefix('trash')->group( function() {
+                Route::get('/', [HostTrashController::class, 'index'])->name('host.trash');
+                Route::post('/restore-show/{id}', [HostTrashController::class, 'restoreShow'])->name('host.restore-show');
+                Route::post('/delete-show/{id}', [HostTrashController::class, 'deleteShow'])->name('host.delete-show');
+            });
         });
     });
 
@@ -135,6 +147,8 @@ Route::middleware('auth')->group( function() {
 
     // Upload Route
     Route::post('/tmp-upload', [FileUploadController::class, 'proccess'])->name('filepond.proccess');
+
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');

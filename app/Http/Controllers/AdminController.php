@@ -9,6 +9,11 @@ class AdminController extends Controller
 {
     public function index(): View
     {
+        // toast()
+        //     ->info('singed in as admin')
+        //     ->pushOnNextPage();
+
+
         return view('admin.index');
     }
 

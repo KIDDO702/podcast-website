@@ -16,9 +16,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function profile()
     {
-        //
+        return view('user.profile');
     }
 
     /**

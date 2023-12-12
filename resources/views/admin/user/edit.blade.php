@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('body')
-    <div class="bg-white rounded drop-shadow-sm flex justify-between items-center py-2 px-4">
+    <div class="bg-white rounded drop-shadow flex justify-between items-center py-2 px-4">
         <h3 class="font-bold text-slate-900 text-2xl">Users</h3>
 
 
@@ -131,7 +131,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="mt-20 w-full bg-white drop-shadow p-7 rounded">
+                <div class="mt-10 w-full bg-white drop-shadow p-7 rounded">
                     <h3 class="font-semibold text-gray-700 text-lg">Permissions</h3>
                     <form action="{{ route('admin.user.assign-permission', $user->id) }}" method="POST">
                         @csrf

@@ -39,24 +39,6 @@
                         </a>
                     </div>
 
-
-                    {{-- <div class="">
-                        <ul class="w-full flex items-center justify-center space-x-10">
-                            <li>
-                                <a href="" class="text-xl font-semibold hover:text-red-800">Home</a>
-                            </li>
-                            <li>
-                                <a href="" class="text-xl font-semibold hover:text-red-800">Shows</a>
-                            </li>
-                            <li>
-                                <a href="" class="text-xl font-semibold hover:text-red-800">Articles</a>
-                            </li>
-                            <li>
-                                <a href="" class="text-xl font-semibold hover:text-red-800">Hosts</a>
-                            </li>
-                        </ul>
-                    </div> --}}
-
                     <div class="lg:w-[20%]">
                         @auth
                             <div class="relative w-full flex justify-end" x-data="{ profile: false }">
@@ -70,7 +52,7 @@
                                 <div class="absolute top-0 right-0 mt-[60px] w-[200px] bg-yellow-600 flex justify-center rounded-b" x-show="profile" x-transition:enter-start="translate-y-full" x-transition:enter-end="-translate-y-0" x-transition:leave="transition ease-in duration-300 trasnform" x-transition:leave-start="-translate-y-0" x-transition:leave-end="translate-y-full" @click.outside="profile = false" x-cloak>
                                     <ul class="w-full divide-y divide-red-800">
                                         <li class="block py-1.5 px-2.5">
-                                            <a href="#" class="text-lg font-semibold flex items-center">
+                                            <a href="{{ route('profile') }}" class="text-lg font-semibold flex items-center">
                                                 <span class="material-symbols-outlined mr-2 text-red-800 text-3xl">
                                                     account_circle
                                                 </span>

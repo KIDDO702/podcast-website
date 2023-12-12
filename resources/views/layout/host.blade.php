@@ -51,6 +51,9 @@
                     <li>
                         <a href="{{ route('host.episode') }}" class="text-xl font-semibold hover:text-red-800">Episodes</a>
                     </li>
+                    <li>
+                        <a href="{{ route('host.trash') }}" class="text-xl font-semibold hover:text-red-800">Trash</a>
+                    </li>
                 </ul>
 
                 <div class="flex items-center space-x-5">
