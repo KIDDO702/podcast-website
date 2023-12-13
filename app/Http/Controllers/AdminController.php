@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Show;
+use App\Models\User;
+use App\Models\Genre;
+use App\Models\Episode;
 use Illuminate\View\View;
 
 class AdminController extends Controller
 {
     public function index(): View
     {
-        // toast()
-        //     ->info('singed in as admin')
-        //     ->pushOnNextPage();
+        $genres = Genre::all();
+        $shows = Show::all();
+        $episodes = Episode::all();
+        $users = User::all();
+        $hosts = User::role('host')->count();
+        $admins = User::role('host')->count();
 
 
-        return view('admin.index');
+
+        return view('admin.index', compact('genres', 'shows', 'episodes', 'users', 'hosts', 'admins'));
     }
 
     public function genre(): View

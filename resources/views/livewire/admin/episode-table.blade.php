@@ -105,7 +105,7 @@
     </div>
 
     <div class="mt-10">
-        {{-- {{ $genres->links() }} --}}
+        {{ $episodes->links() }}
     </div>
 </div>
 

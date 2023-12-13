@@ -9,7 +9,7 @@ use Usernotnull\Toast\Concerns\WireToast;
 
 class GenreTable extends Component
 {
-    use WireToast, WithPagination;
+    use WireToast, WithPagination, WireToast;
 
     public $pagination = 5;
 
@@ -41,7 +41,7 @@ class GenreTable extends Component
 
     public function render()
     {
-        $genres = Genre::orderBy('created_at', 'desc')->paginate($this->pagination);
+        $genres = Genre::orderBy('name', 'asc')->paginate($this->pagination);
 
         return view('livewire.admin.genre-table', compact('genres'));
     }

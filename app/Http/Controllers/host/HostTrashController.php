@@ -19,11 +19,9 @@ class HostTrashController extends Controller
                 ->where('id', $id)->first();
 
         if (!$show) {
-
             toast()
                 ->warning('No show found !')
                 ->pushOnNextPage();
-
 
             return redirect(route('host.trash'));
         }
@@ -47,7 +45,6 @@ class HostTrashController extends Controller
             toast()
                 ->warning('No show found !')
                 ->pushOnNextPage();
-
 
             return redirect(route('host.trash'));
         }

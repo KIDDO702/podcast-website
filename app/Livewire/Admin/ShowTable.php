@@ -19,7 +19,7 @@ class ShowTable extends Component
 
     public function render()
     {
-        $shows = Show::orderBy('created_at', 'desc')->paginate($this->pagination);
+        $shows = Show::orderBy('title', 'asc')->paginate($this->pagination);
         return view('livewire.admin.show-table', compact('shows'));
     }
 }

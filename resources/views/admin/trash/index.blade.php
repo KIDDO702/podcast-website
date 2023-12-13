@@ -22,4 +22,40 @@
             </li>
         </ul>
     </div>
+
+    <div class="mt-10 grid grid-cols-2 lg:gap-5">
+    	<div class="">
+			<div class="w-full bg-white p-5 rounded drop-shadow">
+				<div class="">
+					<h3 class="text-gray-700 text-2xl font-bold">Deleted Genres</h3>
+				</div>
+				<hr class="my-3">
+				<div class="w-full">
+					<livewire:admin.trash.deleted-genres />
+				</div>
+			</div>
+		</div>
+		<div class="">
+			<div class="w-full bg-white p-5 rounded drop-shadow">
+				<div class="">
+					<h3 class="text-gray-700 text-2xl font-bold">Deleted Shows</h3>
+				</div>
+				<hr class="my-3">
+				<div class="w-full">
+					<livewire:admin.trash.deleted-shows />
+				</div>
+			</div>
+		</div>
+		<div class="">
+			<div class="w-full bg-white p-5 rounded drop-shadow">
+				<div class="">
+					<h3 class="text-gray-700 text-2xl font-bold">Deleted Episodes</h3>
+				</div>
+				<hr class="my-3">
+				<div class="w-full">
+					<livewire:admin.trash.deleted-episodes />
+				</div>
+			</div>
+		</div>
+    </div>
 @endsection

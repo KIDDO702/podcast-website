@@ -171,6 +171,23 @@ class EpisodeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $episode = Episode::find($id);
+
+        if (!$episode) {
+
+            toast()
+                ->warning('No episode found')
+                ->pushOnNextPage();
+
+            return back();
+        }
+
+        $episode->delete();
+
+        toast()
+            ->success('Episode deleted successfully')
+            ->pushOnNextPage();
+
+        return back();
     }
 }
