@@ -118,6 +118,13 @@
         @yield('body')
     </main>
 
+    <hr class="border-gray-100 my-7">
+    <footer>
+        <div class="text-center pb-5">
+            <p class="text-center font-semibold text-gray-600 text-lg uppercase">Copywright &copy; 2023 Blvck Media. All Rights Reserved</p>
+        </div>
+    </footer>
+
     {{-- splider-js --}}
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"

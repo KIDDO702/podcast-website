@@ -117,5 +117,11 @@
             </form>
         </div>
     </section>
+
+    <section class="">
+        <div class="container px-5 md:px-3 lg:px-0">
+            <livewire:host.episode.comments :episode="$episode" />
+        </div>
+    </section>
 @endsection
 

@@ -19,6 +19,7 @@ use App\Http\Controllers\host\HostTrashController;
 use App\Http\Controllers\Auth\AuthenticatedSession;
 use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\host\HostEpisodeController;
+use App\Http\Controllers\host\HostProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -138,6 +139,10 @@ Route::middleware('auth')->group( function() {
                 Route::get('/', [HostTrashController::class, 'index'])->name('host.trash');
                 Route::post('/restore-show/{id}', [HostTrashController::class, 'restoreShow'])->name('host.restore-show');
                 Route::post('/delete-show/{id}', [HostTrashController::class, 'deleteShow'])->name('host.delete-show');
+            });
+
+            Route::prefix('profile')->group( function() {
+                Route::get('/', [HostProfileController::class, 'index'])->name('host.profile');
             });
         });
     });

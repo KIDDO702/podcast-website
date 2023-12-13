@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Show;
 use App\Models\Genre;
+use App\Models\Episode;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HostController extends Controller
 {
     public function index(): View
     {
-        // toast()
-        //     ->info('Signed is as host')
-        //     ->pushOnNextPage();
+        $genres = Genre::where('user_id', auth()->user()->id)->count();
+        $shows = Show::where('user_id', auth()->user()->id)->count();
+        $episodes = Episode::where('user_id', auth()->user()->id)->count();
 
-        return view('host.index');
+        $deletedShows = Show::onlyTrashed()->where('user_id', auth()->user()->id)->count();
+        $deletedEpisodes = Episode::onlyTrashed()->where('user_id', auth()->user()->id)->count();
+
+        $trash = $deletedShows + $deletedEpisodes;
+
+
+        return view('host.index', compact('genres', 'shows', 'episodes', 'trash'));
     }
 
     public function show(): View

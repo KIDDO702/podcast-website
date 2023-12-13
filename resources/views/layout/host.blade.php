@@ -66,7 +66,7 @@
                             <div class="absolute top-0 z-20 mt-[60px] w-[190px] bg-yellow-600 flex justify-center rounded-b" x-show="profile" x-transition:enter-start="translate-x-full" x-transition:enter-end="-translate-x-0" x-transition:leave="transition ease-in duration-300 trasnform" x-transition:leave-start="-translate-x-0" x-transition:leave-end="translate-x-full" @click.outside="profile = false" x-cloak>
                                 <ul class="w-full divide-y divide-red-800">
                                     <li class="block py-1.5 px-2.5">
-                                        <a href="#" class="text-lg font-semibold flex items-center">
+                                        <a href="{{ route('host.profile') }}" class="text-lg font-semibold flex items-center">
                                             <span class="material-symbols-outlined mr-2 text-red-800 text-3xl">
                                                 account_circle
                                             </span>
@@ -138,6 +138,12 @@
 
     </main>
 
+    <hr class="border-gray-100 my-7">
+    <footer>
+        <div class="text-center pb-5">
+            <p class="text-center font-semibold text-gray-600 text-lg uppercase">Copywright &copy; 2023 Blvck Media. All Rights Reserved</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
     @yield('scripts')
