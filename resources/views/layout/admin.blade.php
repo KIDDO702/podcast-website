@@ -118,6 +118,9 @@
                 </li>
 
 
+
+
+                @can('access trash')
                 <li class="block py-1.5 absolute bottom-14">
                     <a href="{{ route('admin.trash') }}" class="flex items-center space-x-2">
                         <span class="material-symbols-outlined">
@@ -128,6 +131,7 @@
                         </span>
                     </a>
                 </li>
+                @endcan
             </ul>
         </div>
     </div>

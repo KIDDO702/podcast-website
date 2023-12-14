@@ -5,8 +5,10 @@ namespace App\Http\Controllers\admin;
 use App\Models\User;
 use App\Models\UploadTemp;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
@@ -214,7 +216,56 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $user = User::where('id', $id)->first();
+
+        $validated = $request->validate([
+            'name' => 'required|string|min:5',
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id),],
+            'username' => ['required', 'string', Rule::unique('users', 'username')->ignore($user->id),],
+            'current_password' => 'nullable|string',
+            'new_password' => 'nullable|min:8|string|confirmed',
+        ]);
+
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->username = $validated['username'];
+
+        // Check if a new password is provided
+        if ($validated['new_password'] !== null) {
+            // Check if the current password is correct
+            if (!Hash::check($validated['current_password'], $user->password)) {
+                toast()
+                    ->warning('Incorrect password, please try again')
+                    ->pushOnNextPage();
+
+                return back();
+            }
+
+            // Update the password
+            $user->password = Hash::make($validated['new_password']);
+        }
+
+        $tmp = UploadTemp::where('folder', $request->avatar)->first();
+
+        if ($tmp) {
+
+            $user->clearMediaCollection('avatar');
+            $user->addMedia(storage_path('app/tmp/' . $request->avatar . '/' . $tmp->filename))
+                ->toMediaCollection('avatar');
+
+            Storage::delete('app/tmp/' . $request->avatar);
+            $tmp->delete();
+        }
+
+        $user->update();
+
+
+        toast()
+            ->success('Profile updated successfully')
+            ->pushOnNextPage();
+
+        return back();
     }
 
     /**

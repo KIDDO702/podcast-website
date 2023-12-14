@@ -7,7 +7,7 @@
         <ul class="grid grid-cols-3 md:grid-cols-2 place-content-center text-white">
             @foreach ($genres as $genre)
                 <li class="block py-1.5">
-                    <a href="#">{{ $genre->name }}</a>
+                    <a>{{ $genre->name }}</a>
                 </li>
             @endforeach
         </ul>

@@ -47,4 +47,9 @@ class RegisterUser extends Controller
 
         return redirect(route('home'));
     }
+
+    public function updateUser(Request $request)
+    {
+        dd($request->all());
+    }
 }

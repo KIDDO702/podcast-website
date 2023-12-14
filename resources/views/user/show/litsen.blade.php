@@ -119,15 +119,6 @@
             <div class="w-full">
                 <div class="w-full lg:w-[60%] bg-slate-800 rounded drop-shadow p-7">
                     <h3 class="text-xl uppercase font-semibold text-gray-200">Ep: <span class="text-yellow-400">{{ $selectedEpisode->title }}</span></h3>
-                    <div class="w-full mt-7">
-                        @if(!count($selectedEpisode->comments) > 0)
-                            <div class="w-full">
-                                <p class="text-gray-200 text-start font-semibold">No comments currently</p>
-                            </div>
-                        @else
-                            <livewire:user.episode.comments :episode="$selectedEpisode" />
-                        @endif
-                    </div>
                     <div class="w-full mt-10">
                         @auth
                             <livewire:user.episode.comment :episode="$selectedEpisode" />
@@ -136,6 +127,15 @@
                                 <p class="text-gray-200 text-start font-semibold">You need to <a href="{{ route('login') }}" class="text-yellow-600 underline underline-offset-4">login</a> to comment</p>
                             </div>
                         @endauth
+                    </div>
+                    <div class="w-full mt-7">
+                        @if(!count($selectedEpisode->comments) > 0)
+                            <div class="w-full">
+                                <p class="text-gray-200 text-start font-semibold">No comments currently</p>
+                            </div>
+                        @else
+                            <livewire:user.episode.comments :episode="$selectedEpisode" />
+                        @endif
                     </div>
                 </div>
             </div>

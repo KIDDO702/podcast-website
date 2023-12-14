@@ -4,7 +4,7 @@
             <h3 class="text-yellow-400 text-3xl font-bold">Shows</h3>
         </div>
         <div>
-            <a href="" class="bg-red-800 px-4 py-2 rounded text-white focus:outline focus:outline-red-800 focus:outline-offset-2 hover:bg-red-700">
+            <a href="{{ route('shows') }}" class="bg-red-800 px-4 py-2 rounded text-white focus:outline focus:outline-red-800 focus:outline-offset-2 hover:bg-red-700">
                 View all
             </a>
         </div>

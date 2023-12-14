@@ -7,7 +7,7 @@
             @if(!$replyUser->hasMedia('avatar'))
                 <img src="{{ asset('avatar.png') }}" alt="{{ $replyUser->username }}" class="bg-slate-950 w-10 h-10 rounded">
             @else
-                <img src="{{ $user->getFirstMediaUrl('avatar') }}" alt="{{ $replyUser->username }}" class="bg-slate-950 w-10 h-10 rounded">
+                <img src="{{ $replyUser->getFirstMediaUrl('avatar') }}" alt="{{ $replyUser->username }}" class="bg-slate-950 w-10 h-10 rounded">
             @endif
         </div>
         <div class="w-full">

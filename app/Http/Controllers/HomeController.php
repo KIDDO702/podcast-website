@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Episode;
 use App\Models\Show;
+use App\Models\Genre;
+use App\Models\Episode;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -29,6 +30,19 @@ class HomeController extends Controller
         }
 
         return view('user.show.index', compact('show'));
+    }
+
+    public function shows()
+    {
+        $shows = Show::where('published', true)->orderBy('title', 'asc')->paginate(10);
+        return view('user.shows', compact('shows'));
+    }
+
+    public function genre(string $slug)
+    {
+
+        $genre = Genre::where('slug', $slug)->first();
+        return view('user.genre');
     }
 
     public function litsen(Request $request, string $slug): View

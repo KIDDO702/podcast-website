@@ -98,7 +98,7 @@ Route::middleware('auth')->group( function() {
             });
 
             Route::prefix('trash')->group( function () {
-                Route::get('/', [TrashController::class, 'index'])->name('admin.trash');
+                Route::get('/', [TrashController::class, 'index'])->name('admin.trash')->middleware('can:access trash');
             });
         });
     });
@@ -149,8 +149,11 @@ Route::middleware('auth')->group( function() {
     Route::post('/tmp-upload', [FileUploadController::class, 'proccess'])->name('filepond.proccess');
 
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('/profile/{id}', [UserController::class, 'update'])->name('user.update');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/shows', [HomeController::class, 'shows'])->name('shows');
 Route::get('/{show}/', [HomeController::class, 'show'])->name('show');
 Route::get('litsen/{show}', [HomeController::class, 'litsen'])->name('show.litsen');
+Route::get('g/{genre}', [HostController::class, 'genre'])->name('genre');

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Blvck Radio</title>
 
     {{-- Google fonts --}}
@@ -32,20 +33,24 @@
         </div>
         <div class="bg-yellow-600">
             <div class="container mx-auto">
-                <div class="py-1 mx-auto flex items-center justify-between px-3">
+                <div class="py-1.5 mx-auto flex items-center justify-between px-3">
                     <div class="lg:w-[30%]">
                         <a href="/" class="w-full">
-                            <img src="{{ asset('logo.png') }}" alt="logo" class="w-[25%] lg:w-[17%]">
+                            <img src="{{ asset('logo.png') }}" alt="logo" class="w-[20%] lg:w-[17%]">
                         </a>
                     </div>
 
-                    <div class="lg:w-[20%]">
+                    <div class="lg:w-[25%]">
                         @auth
                             <div class="relative w-full flex justify-end" x-data="{ profile: false }">
                                 <a class="cursor-pointer text-xl font-semibold w-full flex justify-end" @click="profile = !profile">
-                                    {{-- <span class="bg-red-800 text-white px-4 py-2 rounded drop-shadow-sm uppercase transition-all hover:drop-shadow-lg">{{ auth()->user()->username }}</span> --}}
                                     @if (!auth()->user()->hasMedia('avatar'))
-                                        <img src="{{ asset('avatar.png') }}" alt="{{ auth()->user()->username }}" class="w-[25%] lg:w-[17%] bg-slate-700 rounded-full outline outline-red-800 outline-offset-2">
+                                        <img src="{{ asset('avatar.png') }}" alt="{{ auth()->user()->username }}" class="w-[25%] lg:w-[17%] bg-slate-700 rounded-md outline outline-red-800 outline-offset-2">
+                                    @else
+                                        @php
+                                            $user = auth()->user();
+                                        @endphp
+                                        <img src="{{ $user->getFirstMediaUrl('avatar') }}" class="w-[25%] lg:w-[15%] bg-slate-700 rounded-md outline outline-red-800 outline-offset-2">
                                     @endif
                                 </a>
 

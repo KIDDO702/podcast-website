@@ -19,7 +19,16 @@
         </div>
     </section>
 
-    <section class="py-16">
+    <section class="my-20">
+        <div class="container px-5 md:px-3 lg:px-0">
+            <div class="w-full bg-slate-700 border border-slate-600 p-7 rounded drop-shadow">
+                <h3 class="text-yellow-400 text-2xl font-semibold">Latest Comments</h3>
+                <livewire:user.latest-comments />
+            </div>
+        </div>
+    </section>
+
+    <section class="">
         <div class="container px-5 md:px-3 lg:px-0">
             <div class="w-full lg:flex lg:items-start lg:space-x-10 mt-5">
                 <div class="w-full lg:w-[70%]">

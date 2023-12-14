@@ -27,7 +27,7 @@ FilePond.create(inputElement).setOptions({
     imageResizeTargetHeight: 200,
     allowFileSizeValidation: true,
     maxFileSize: '750kb',
-    minFileSize: '50kb',
+    minFileSize: '15kb',
     labelMaxFileSizeExceeded: 'max file size 750kb',
     labelMinFileSize: 'min file size 50kb',
     server: {
