@@ -18,7 +18,8 @@ class UserController extends Controller
      */
     public function profile()
     {
-        return view('user.profile');
+        $user = auth()->user();
+        return view('user.profile', compact('user'));
     }
 
     /**

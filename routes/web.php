@@ -7,7 +7,6 @@ use App\Http\Controllers\ShowController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\Auth\RegisterUser;
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\UserController;
@@ -19,7 +18,6 @@ use App\Http\Controllers\host\HostTrashController;
 use App\Http\Controllers\Auth\AuthenticatedSession;
 use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\host\HostEpisodeController;
-use App\Http\Controllers\host\HostProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,10 +137,6 @@ Route::middleware('auth')->group( function() {
                 Route::get('/', [HostTrashController::class, 'index'])->name('host.trash');
                 Route::post('/restore-show/{id}', [HostTrashController::class, 'restoreShow'])->name('host.restore-show');
                 Route::post('/delete-show/{id}', [HostTrashController::class, 'deleteShow'])->name('host.delete-show');
-            });
-
-            Route::prefix('profile')->group( function() {
-                Route::get('/', [HostProfileController::class, 'index'])->name('host.profile');
             });
         });
     });
