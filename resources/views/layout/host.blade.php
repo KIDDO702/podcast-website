@@ -19,8 +19,10 @@
 
     <x-host.tinymce-config/>
 
+    <link rel="stylesheet" href="{{ asset('build/assets/app-23d0f508.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/assets/app-cc57fb09.css') }}" />
+
     @livewireStyles()
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="antialised bg-slate-950 font-nunito">
     <livewire:toasts />
@@ -146,6 +148,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+    <script src="{{ asset('build/assets/app-4915183b.js') }}"></script>
     @yield('scripts')
 
     @livewireScriptConfig()

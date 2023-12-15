@@ -20,8 +20,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="{{ asset('build/assets/app-23d0f508.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/assets/app-cc57fb09.css') }}" />
+
     @livewireStyles
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="antialised bg-slate-950 font-poppins overflow-x-hidden">
     <livewire:toasts />
@@ -134,6 +136,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"
         integrity="sha512-RWosNnDNw8FxHibJqdFRySIswOUgYhFxnmYO3fp+BgCU7gfo4z0oS7mYFBvaa8qu+axY39BmQOrhW3Tp70XbaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('build/assets/app-4915183b.js') }}"></script>
     @yield('scripts')
     @livewireScriptConfig
 </body>

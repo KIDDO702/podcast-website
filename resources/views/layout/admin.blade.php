@@ -20,8 +20,11 @@
 
     <x-head.tinymce-config/>
 
+    <link rel="stylesheet" href="{{ asset('build/assets/app-23d0f508.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/assets/app-cc57fb09.css') }}" />
+
+
     @livewireStyles
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="antialiased bg-slate-50 flex font-poppins">
     <livewire:toasts />
@@ -116,10 +119,6 @@
                         </span>
                     </a>
                 </li>
-
-
-
-
                 @can('access trash')
                 <li class="block py-1.5 absolute bottom-14">
                     <a href="{{ route('admin.trash') }}" class="flex items-center space-x-2">
@@ -200,6 +199,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+    <script src="{{ asset('build/assets/app-4915183b.js') }}"></script>
     @yield('scripts')
     @livewireScriptConfig
 </body>

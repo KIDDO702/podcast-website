@@ -1,4 +1,4 @@
-<div class="mt-5 grid md:grid-cols-2 lg:grid-cols-5 gap-5" wire:poll.keep-alive>
+<div class="mt-5 grid md:grid-cols-2 lg:grid-cols-5 gap-5">
     @foreach ($comments as $comment)
         <div class="w-full bg-slate-500 border border-slate-500 rounded p-5">
             <div class="w-full flex justify-between">
