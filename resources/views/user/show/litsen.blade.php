@@ -42,7 +42,11 @@
                             <div class="">
                                 <h3 class="text-gray-200 font-bold text-xl tracking-[2px] uppercase">{{ $selectedEpisode->title }}</h3>
                             </div>
-                            <div class="my-5 rounded" id="aplayer"></div>
+                            <div class="mt-5">
+                                <audio controls class="w-full bg-slate-950">
+                                    <source src="{{ $selectedEpisode->getFirstMediaUrl('audio') }}" type="">
+                                </audio>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,15 +54,12 @@
                     <div class="w-[30%]">
                         <img src="{{ $show->getFirstMediaUrl('show_thumbnail') }}" alt="{{ $show->slug }}" class="w-full rounded">
                     </div>
-                    <div class="w-full mt-3">
-                        <h3 class="text-gray-200 font-semibold text-xl">Rate this show</h3>
-                    </div>
                 </div>
             </div>
 
             <div class="mt-10">
                 <a class="cursor-pointer mt-10 font-semibold text-yellow-600 text-sm flex items-center" @click="description = !description">
-                    <span>Description</span> 
+                    <span>Description</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                     </svg>
@@ -141,23 +142,4 @@
             </div>
         </div>
     </section>
-@endsection
-
-@section('scripts')
-    <script>
-        const ap = new APlayer({
-            container: document.getElementById('aplayer'),
-            preload: true,
-            mini: false,
-            // fixed: true,
-            theme: '#1f2937',
-            audio: [{
-                name: '{{ $selectedEpisode->title }}',
-                artist: '{{ $selectedEpisode->user->name }}',
-                url: '{{ $selectedEpisode->getFirstMediaUrl('audio') }}',
-                cover: '{{ $selectedEpisode->getFirstMediaUrl('episode_thumbnail') }}',
-            }]
-        });
-
-    </script>
 @endsection

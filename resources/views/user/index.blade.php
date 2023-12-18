@@ -40,6 +40,33 @@
             </div>
         </div>
     </section>
+
+    <section class="py-10">
+        <div class="container px-5 md:px-3 lg:px-0">
+            <div>
+                <h3 class="text-yellow-400 text-3xl font-bold">Latest Episodes</h3>
+            </div>
+
+            <div class="mt-7 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+                @foreach ($episodes as $episode)
+                    @php
+                        $show = $episode->show;
+                    @endphp
+                    <a href="{{ route('show.litsen', ['show' => $show->slug, 'ep' => $episode->slug]) }}" class="block">
+                        <img
+                            alt="{{ $episode->slug }}"
+                            src="{{ $episode->getFirstMediaUrl('episode_thumbnail') }}"
+                            class="h-64 w-full object-cover sm:h-80 lg:h-96"
+                        />
+
+                        <h3 class="mt-3 uppercase text-xl font-bold text-gray-400 sm:text-xl">{{ $episode->title }}</h3>
+                        <span class="text-gray-500">{{ $episode->show->title }}</span>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    </section>
 @endsection
 
 

@@ -110,8 +110,8 @@ Route::middleware('auth')->group( function() {
 
             Route::middleware('can:create genre')->prefix('genre')->group( function () {
                 Route::get('/', [HostController::class, 'genre'])->name('host.genre');
-                Route::get('/e/{slug}', [HostGenreController::class, 'edit'])->name('host.genre.edit');
-                Route::put('e/{slug}', [HostGenreController::class, 'update'])->name('host.genre.update');
+                Route::get('/e/{slug}', [HostGenreController::class, 'edit'])->name('host.genre.edit')->middleware('can:create genre');
+                Route::put('e/{slug}', [HostGenreController::class, 'update'])->name('host.genre.update')->middleware('can:create genre');
                 Route::delete('/d/{id}', [GenreController::class, 'destroy'])->name('host.genre.delete')->middleware('password.confirm');
             });
 
@@ -136,7 +136,9 @@ Route::middleware('auth')->group( function() {
             Route::prefix('trash')->group( function() {
                 Route::get('/', [HostTrashController::class, 'index'])->name('host.trash');
                 Route::post('/restore-show/{id}', [HostTrashController::class, 'restoreShow'])->name('host.restore-show');
+                Route::post('/restore-episode/{id}', [HostTrashController::class, 'restoreEpisode'])->name('host.restore-episode');
                 Route::post('/delete-show/{id}', [HostTrashController::class, 'deleteShow'])->name('host.delete-show');
+                Route::post('/delete-episode/{id}', [HostTrashController::class, 'deleteEpisode'])->name('host.delete-episode');
             });
         });
     });
@@ -156,4 +158,4 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shows', [HomeController::class, 'shows'])->name('shows');
 Route::get('/{show}/', [HomeController::class, 'show'])->name('show');
 Route::get('litsen/{show}', [HomeController::class, 'litsen'])->name('show.litsen');
-Route::get('g/{genre}', [HostController::class, 'genre'])->name('genre');
+Route::get('g/{genre}', [HomeController::class, 'genre'])->name('user.genre');

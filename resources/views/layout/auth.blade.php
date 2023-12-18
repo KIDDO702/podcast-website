@@ -15,11 +15,10 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
+    <link rel="stylesheet" href="{{ asset('build/assets/app-cc57fb09.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-f09d4a24.css') }}" />
+
     @livewireStyles
-    <link rel="stylesheet" href="{{ asset('build/assets/app-23d0f508.css') }}" />
-    <link rel="stylesheet" href="{{ asset('build/assets/app-cc57fb09.css') }}" />
-
-
 </head>
 <body class="antialiased bg-slate-950 font-nunito">
     <livewire:toasts />
@@ -35,7 +34,7 @@
         </div>
     </section>
 
-    <script src="{{ asset('build/assets/app-4915183b.js') }}"></script>
+    <script src="{{ asset('build/assets/app-d32546a1.js') }}"></script>
     @livewireScriptConfig
 </body>
 </html>

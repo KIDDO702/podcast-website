@@ -17,9 +17,7 @@ class AdminController extends Controller
         $episodes = Episode::all();
         $users = User::all();
         $hosts = User::role('host')->count();
-        $admins = User::role('host')->count();
-
-
+        $admins = User::role('admin')->count();
 
         return view('admin.index', compact('genres', 'shows', 'episodes', 'users', 'hosts', 'admins'));
     }

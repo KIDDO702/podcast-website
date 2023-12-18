@@ -13,7 +13,8 @@ class HomeController extends Controller
     public function index(): View
     {
         $shows = Show::latest()->take(5)->get();
-        return view('user.index', compact('shows'));
+        $episodes = Episode::latest()->take(5)->get();
+        return view('user.index', compact('shows', 'episodes'));
     }
 
     public function show(string $slug)
@@ -42,7 +43,8 @@ class HomeController extends Controller
     {
 
         $genre = Genre::where('slug', $slug)->first();
-        return view('user.genre');
+        $shows = $genre->shows;
+        return view('user.genre', compact('genre', 'shows'));
     }
 
     public function litsen(Request $request, string $slug): View

@@ -7,9 +7,17 @@ use Livewire\Component;
 
 class Genres extends Component
 {
+    public $perPage = 10;
+
     public function render()
     {
-        $genres = Genre::orderBy('name', 'asc')->get();
+        $genres = Genre::latest()->paginate($this->perPage);
+
         return view('livewire.genres', compact('genres'));
+    }
+
+    public function loadMore()
+    {
+        $this->perPage += 10;
     }
 }

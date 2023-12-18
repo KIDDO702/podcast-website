@@ -19,8 +19,8 @@
 
     <x-host.tinymce-config/>
 
-    <link rel="stylesheet" href="{{ asset('build/assets/app-23d0f508.css') }}" />
-    <link rel="stylesheet" href="{{ asset('build/assets/app-cc57fb09.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/assets/app-cc57fb09.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-f09d4a24.css') }}" />
 
     @livewireStyles()
 </head>
@@ -148,7 +148,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
-    <script src="{{ asset('build/assets/app-4915183b.js') }}"></script>
+    <script src="{{ asset('build/assets/app-d32546a1.js') }}"></script>
     @yield('scripts')
 
     @livewireScriptConfig()

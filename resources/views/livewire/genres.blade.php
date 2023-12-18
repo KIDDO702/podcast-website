@@ -7,9 +7,13 @@
         <ul class="grid grid-cols-3 md:grid-cols-2 place-content-center text-white">
             @foreach ($genres as $genre)
                 <li class="block py-1.5">
-                    <a>{{ $genre->name }}</a>
+                    <a href="{{ route('user.genre', $genre->slug) }}">{{ $genre->name }}</a>
                 </li>
             @endforeach
         </ul>
+
+        <div class="flex items-center justify-center mt-7">
+            <button wire:click="loadMore" class="text-yellow-600 text-sm font-semibold">Load More</button>
+        </div>
     </div>
 </div>
