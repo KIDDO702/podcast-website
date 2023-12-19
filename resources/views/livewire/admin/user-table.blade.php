@@ -122,6 +122,6 @@
     </div>
 
     <div class="mt-10">
-        {{-- {{ $genres->links() }} --}}
+        {{ $users->links() }}
     </div>
 </div>

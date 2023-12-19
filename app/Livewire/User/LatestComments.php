@@ -9,7 +9,10 @@ class LatestComments extends Component
 {
     public function render()
     {
-        $comments = Comment::where('parent_id', null)->orderBy('created_at', 'desc')->paginate(5);
+        $comments = Comment::where('parent_id', null)
+                             ->where('approved', true)
+                             ->orderBy('created_at', 'desc')
+                             ->paginate(5);
         return view('livewire.user.latest-comments', compact('comments'));
     }
 }

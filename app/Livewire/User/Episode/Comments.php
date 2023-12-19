@@ -52,6 +52,7 @@ class Comments extends Component
                 $query->orderBy('created_at', 'desc');
             }])
             ->where('episode_id', $this->episode->id)
+            ->where('approved', true)
             ->whereNull('parent_id')
             ->orderBy('created_at', 'desc')
             ->get();

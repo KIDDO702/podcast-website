@@ -18,7 +18,7 @@
             <input type="text" wire:model='search' placeholder="Search Comment" class="w-full px-4 py-2 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded focus:outline focus:outline-gray-300 focus:outline-offset-2 placeholder:text-sm placeholder:text-gray-700" x-model="search" @change="$wire.search(search)">
         </div>
     </div>
-    
+
     <div class="mt-7 relative overflow-x-auto border border-gray-300 sm:rounded-lg">
         <table class="w-full text-sm text-left">
             <thead class="uppercase bg-gray-100">
@@ -59,7 +59,7 @@
                             </div>
                         </td>
                         <th scope="row" class="px-6 py-2 text-black font-medium whitespace-nowrap">
-                            <a href="{{ route('admin.episode.edit', $episode->id) }}">
+                            <a href="{{ route('admin.episode.comment-view', ['id' => $episode->id, 'comment' => $comment->id]) }}" class="text-blue-950 underline underline-offset-2">
                                 {{ $comment->body }}
                             </a>
                         </th>
@@ -90,11 +90,11 @@
                         </td>
                         <td class="flex items-center px-6 py-2 space-x-3">
                         {{-- <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> --}}
-                            <form action="#" method="post">
+                            <form action="{{ route('admin.episode.comment-delete', $comment->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    onclick="return confirm('Are you sure you want to delete this episode?')"
+                                    onclick="return confirm('Are you sure you want to delete this comment?')"
                                     class="cursor-pointer bg-red-50 font-medium text-red-600 border border-red-400 p-2 flex items-center justify-between rounded-full hover:bg-red-100">
                                     <span class="material-symbols-outlined">
                                         delete

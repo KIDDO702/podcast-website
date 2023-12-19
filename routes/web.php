@@ -68,6 +68,10 @@ Route::middleware('auth')->group( function() {
                 Route::get('e/{id}', [EpisodeController::class, 'edit'])->name('admin.episode.edit')->middleware('can:manage episode');
                 Route::put('e/{id}', [EpisodeController::class, 'update'])->name('admin.episode.update')->middleware('can:manage episode');
                 Route::delete('d/{id}', [EpisodeController::class, 'destroy'])->name('admin.episode.destroy')->middleware('can:delete episode');
+
+                Route::get('c/{id}', [EpisodeController::class, 'commentView'])->name('admin.episode.comment-view')->middleware('can:manage comment');
+                Route::put('c/{id}', [EpisodeController::class, 'commentEdit'])->name('admin.episode.coment-edit')->middleware('can:manage comment');
+                Route::delete('c/{id}', [EpisodeController::class, 'commentDelete'])->name('admin.episode.comment-delete')->middleware('can:manage comment');
             });
 
             Route::prefix('roles')->group( function() {
@@ -131,6 +135,8 @@ Route::middleware('auth')->group( function() {
                 Route::get('e/{show}/{episode}', [HostEpisodeController::class, 'edit'])->name('host.episode.edit');
                 Route::put('e/{show}/{id}', [HostEpisodeController::class, 'update'])->name('host.episode.update');
                 Route::delete('d/{id}', [HostEpisodeController::class, 'destroy'])->name('host.episode.delete');
+
+                Route::get('/{comment}', [HostEpisodeController::class, 'commentView'])->name('host.episode.comment-view');
             });
 
             Route::prefix('trash')->group( function() {

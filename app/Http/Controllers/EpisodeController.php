@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Show;
+use App\Models\Comment;
 use App\Models\Episode;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
@@ -81,11 +82,16 @@ class EpisodeController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the episode comment resource.
      */
-    public function show(string $id)
+    public function commentView(Request $request, string $id)
     {
+        $episode = Episode::find($id)->first();
 
+        $commentId = $request->query('comment');
+        $comment = Comment::find($commentId)->first();
+
+        return view('admin.comment.edit', compact('episode', 'comment'));
     }
 
     /**
@@ -164,6 +170,49 @@ class EpisodeController extends Controller
             ->pushOnNextPage();
 
         return redirect(route('admin.episode.update', $episode->id));
+    }
+
+    public function commentEdit(Request $request, string $id)
+    {
+        $commentId = $request->query('comment');
+        $comment = Comment::find($commentId)->first();
+
+        $validated = $request->validate([
+            'body' => 'required|string',
+        ]);
+
+        $comment->body = $validated['body'];
+        $comment->approved = $request->has('approved');
+
+        $comment->update();
+
+        toast()
+            ->success('comment updated successfully')
+            ->pushOnNextPage();
+
+        return back();
+    }
+
+    public function commentDelete(string $id)
+    {
+        $comment = Comment::find($id)->first();
+
+        if (!$comment) {
+
+            toast()
+                ->warning('No comment found!')
+                ->pushOnNextPage();
+
+            return back();
+        }
+
+        $comment->delete();
+
+        toast()
+            ->success('Comment deleted successfully')
+            ->pushOnNextPage();
+
+        return back();
     }
 
     /**
